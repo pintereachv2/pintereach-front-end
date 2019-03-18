@@ -1,0 +1,4 @@
+[build]
+  base    = "pintereach"
+  command = "make"
+  publish = "pintereach/public"
