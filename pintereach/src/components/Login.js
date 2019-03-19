@@ -8,7 +8,7 @@ import { Button, Form, Label, Input } from 'reactstrap';
 import Navigation from './Navigation';
 
 import '../App.css';
-
+const URL = 'localhost:4000' //env[process.env.environment].url
 class Login extends React.Component {
   state = {
     credentials: {
@@ -36,11 +36,20 @@ class Login extends React.Component {
 
     console.log(this.state.credentials)
     const creds = this.state.credentials
-    setGlobal(axios.post(`${URL}/api/login`, creds)
+    // setGlobal(axios.post(`${URL}/api/login`, creds)
+    //   .then(res => {
+    //     setGlobal({isLoggingIn: true})
+    //     localStorage.setItem("jwt", res.data.token);
+    //   }));
+
+    const URL = 'http://localhost:4000' //env[process.env.environment].url
+    axios.post(`${URL}/api/login`, creds)
       .then(res => {
-        setGlobal({isLoggingIn: true})
+        setGlobal({isLoggedIn:true})
         localStorage.setItem("jwt", res.data.token);
-      }));
+        this.props.history.push('/login')
+      }).catch(err => console.log(err));
+
 
   };
 
