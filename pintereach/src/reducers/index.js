@@ -23,6 +23,8 @@ import {
           isRegistered: true
         };
       }
+      default:
+        return state;
     }
   };
   
