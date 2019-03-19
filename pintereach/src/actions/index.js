@@ -15,7 +15,7 @@ export const REGISTER_START = "REGISTER_START";
 // export const TOGGLE_UPDATE_ARTICLE = 'TOGGLE_UPDATE_ARTICLE';
 // export const ERROR = 'ERROR';
 
-const URL = env[process.env.environment].url
+const URL = 'localhost:4000' //env[process.env.environment].url
 
 export const login = creds => dispatch => {
     console.log(URL);

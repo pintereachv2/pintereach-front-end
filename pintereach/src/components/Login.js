@@ -1,4 +1,5 @@
 import React, { setGlobal } from 'reactn';
+import axios from 'axios'
 import { connect } from 'react-redux';
 import Loader from 'react-loader-spinner';
 import { Button, Form, Label, Input } from 'reactstrap';
@@ -37,6 +38,7 @@ class Login extends React.Component {
     const creds = this.state.credentials
     axios.post(`${URL}/api/login`, creds)
       .then(res => {
+        setGlobal({isLoggingIn: true})
         localStorage.setItem("jwt", res.data.token);
       });
   };
@@ -84,7 +86,9 @@ const mapStateToProps = state => {
   };
 };
 
-export default connect(
-  mapStateToProps,
-  { login }
-)(Login);
+export default Login
+
+// export default connect(
+//   mapStateToProps,
+//   { login }
+// )(Login);

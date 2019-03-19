@@ -23,9 +23,10 @@ const mapStateToProps = state => ({
     // errorStatusCode: state.errorStatusCode
   });
   
-  export default withRouter(
-    connect(
-      mapStateToProps,
-      {}
-    )(PrivateRoute)
-  );
+export default PrivateRoute
+//   export default withRouter(
+//     connect(
+//       mapStateToProps,
+//       {}
+//     )(PrivateRoute)
+//   );

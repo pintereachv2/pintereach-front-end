@@ -4,7 +4,7 @@ import { createStore, applyMiddleware } from 'redux';
 import { Provider } from 'react-redux';
 import thunk from 'redux-thunk';
 
-import 'bootstrap/dist/css/bootstrap.css';
+// import 'bootstrap/dist/css/bootstrap.css';
 import './index.css';
 import App from './App';
 import reducer from './reducers'
@@ -13,18 +13,18 @@ require('dotenv').config();
 
 // const store = createStore(reducer, applyMiddleware(thunk));
 setGlobal({
-    login: {
-        error: '',
-        isRegistered: false,
-        isLoggingIn: false
-    }
+    error: '',
+    isRegistered: false,
+    isLoggingIn: false
 })
+// login: {
+// }
 
 const rootElement = document.getElementById('root');
 ReactDOM.render(
-    <Provider store={store}>
-        <App />
-    </Provider>,
+    <App />,
     rootElement
-);
-
+    );
+    
+    // <Provider store={store}>
+    // </Provider>,

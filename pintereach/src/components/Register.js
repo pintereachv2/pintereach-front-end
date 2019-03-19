@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { Button, Form, FormGroup, Label, Input } from 'reactstrap';
 import { Link } from 'react-router-dom';
 import Loader from 'react-loader-spinner';
-
+import axios from 'axios'
 // import './App.css';
 import Navigation from './Navigation';
 // import Login from './components/Login';
@@ -40,6 +40,7 @@ class Register extends Component {
     const creds = this.state.registration
     axios.post(`${URL}/api/login`, creds)
       .then(res => {
+        setGlobal({isRegistered:true})
         localStorage.setItem("jwt", res.data.token);
       });
   };
@@ -67,7 +68,7 @@ class Register extends Component {
             </FormGroup>
 
             <Button>
-              {this.props.isRegistered ? (
+              {this.global.isRegistered ? (
                 <Loader type="ThreeDots" color="#1f2a38" height="12" width="26" />
               ) : (
                   'Sign Up'
@@ -89,7 +90,8 @@ const mapStateToProps = state => {
   };
 };
 
-export default connect(
-  mapStateToProps,
-  { register }
-)(Register);
+export default Register
+// export default connect(
+//   mapStateToProps,
+//   { register }
+// )(Register);
