@@ -1,4 +1,4 @@
-import React from 'react';
+import React from 'reactn';
 import { connect } from 'react-redux';
 import Loader from 'react-loader-spinner';
 import { Button, Form, Label, Input } from 'reactstrap';
