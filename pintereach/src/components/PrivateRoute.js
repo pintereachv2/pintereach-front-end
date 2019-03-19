@@ -1,4 +1,4 @@
-import React from 'react';
+import React from 'reactn';
 import { Route, Redirect, withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 
@@ -20,10 +20,12 @@ const PrivateRoute = ({ component: Component, ...rest }) => {
 const mapStateToProps = ({errorStatusCode}) => ({
     errorStatusCode: state.errorStatusCode
   });
-  
-export default withRouter(
-connect(
-    mapStateToProps,
-    {}
-)(PrivateRoute)
-);
+
+export default PrivateRoute
+//   export default withRouter(
+//     connect(
+//       mapStateToProps,
+//       {}
+//     )(PrivateRoute)
+//   );
+

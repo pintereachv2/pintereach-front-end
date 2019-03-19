@@ -1,4 +1,5 @@
-import React from 'react';
+import React, { setGlobal } from 'reactn';
+import axios from 'axios'
 import { connect } from 'react-redux';
 import Loader from 'react-loader-spinner';
 import { Button, Form, Label, Input } from 'reactstrap';
@@ -32,6 +33,15 @@ class Login extends React.Component {
     this.props
       .login(this.state.credentials) // action creator called "login"
       .then(() => this.props.history.push('/'));
+
+    console.log(this.state.credentials)
+    const creds = this.state.credentials
+    axios.post(`${URL}/api/login`, creds)
+      .then(res => {
+        setGlobal({isLoggingIn: true})
+        localStorage.setItem("jwt", res.data.token);
+      });
+
   };
 
   render() {
@@ -60,8 +70,8 @@ class Login extends React.Component {
               {this.props.isLoggingIn ? (
                 <Loader type="ThreeDots" color="#1f2a38" height="12" width="26" />
               ) : (
-                'Log in'
-              )}
+                  'Log in'
+                )}
             </Button>
           </Form>
         </div>
@@ -76,7 +86,9 @@ const mapStateToProps = ({error, isLoggingIn}) => ({
   isLoggingIn
 });
 
-export default connect(
-  mapStateToProps,
-  { login }
-)(Login);
+export default Login
+
+// export default connect(
+//   mapStateToProps,
+//   { login }
+// )(Login);
