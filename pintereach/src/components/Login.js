@@ -17,6 +17,7 @@ class Login extends React.Component {
   };
 
   handleChange = e => {
+    console.log(process.env);
     this.setState({
       credentials: {
         ...this.state.credentials,

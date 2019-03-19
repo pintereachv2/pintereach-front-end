@@ -1,5 +1,5 @@
 import axios from "axios";
-
+import { env } from '../environment';
 
 export const LOGIN_START = "LOGIN_START";
 export const REGISTER_START = "REGISTER_START";
@@ -15,11 +15,12 @@ export const REGISTER_START = "REGISTER_START";
 // export const TOGGLE_UPDATE_ARTICLE = 'TOGGLE_UPDATE_ARTICLE';
 // export const ERROR = 'ERROR';
 
-
+const URL = env[process.env.environment].url
 
 export const login = creds => dispatch => {
+    console.log(URL);
   dispatch({ type: LOGIN_START });
-  return axios.post("https://pintereacher.herokuapp.com/api/login", creds)
+  return axios.post(`${URL}/api/login`, creds)
   .then(res => {
     localStorage.setItem("jwt", res.data.token);
   });
@@ -27,7 +28,7 @@ export const login = creds => dispatch => {
 
 export const register = creds => dispatch => {
     dispatch({ type: REGISTER_START });
-    return axios.post("https://pintereacher.herokuapp.com/api/register", creds)
+    return axios.post(`${URL}/api/login`, creds)
     .then(res => {
       localStorage.setItem("jwt", res.data.token);
     });

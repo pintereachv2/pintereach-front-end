@@ -10,6 +10,7 @@ import Navigation from './Navigation';
 // import Home from './components/Home';
 // import PrivateRoute from './components/PrivateRoute';
 import { register } from '../actions';
+import { env } from '../environment';
 
 class Register extends Component {
   state = {
@@ -21,6 +22,7 @@ class Register extends Component {
   }
   
   handleChange = e => {
+    console.log(process.env);
     this.setState({
       registration: {
         ...this.registration,
