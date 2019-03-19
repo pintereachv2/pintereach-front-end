@@ -8,9 +8,8 @@ import 'bootstrap/dist/css/bootstrap.css';
 import './index.css';
 import App from './App';
 import reducer from './reducers'
-
-
 require('dotenv').config();
+
 
 const store = createStore(reducer, applyMiddleware(thunk));
 
