@@ -8,10 +8,8 @@ const PrivateRoute = ({ component: Component, ...rest }) => {
         {...rest} 
         render={() => {
             if (localStorage.getItem('token')) {
-                console.log('semi-working');
                 return <Component />
             } else {
-                console.log('not-working');
                 return <Redirect to='/login' />
             }
         }}
@@ -19,13 +17,13 @@ const PrivateRoute = ({ component: Component, ...rest }) => {
     );
 }
 
-const mapStateToProps = state => ({
-    // errorStatusCode: state.errorStatusCode
+const mapStateToProps = ({errorStatusCode}) => ({
+    errorStatusCode: state.errorStatusCode
   });
   
-  export default withRouter(
-    connect(
-      mapStateToProps,
-      {}
-    )(PrivateRoute)
-  );
+export default withRouter(
+connect(
+    mapStateToProps,
+    {}
+)(PrivateRoute)
+);
