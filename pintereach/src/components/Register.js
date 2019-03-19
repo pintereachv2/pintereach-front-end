@@ -22,14 +22,15 @@ class Register extends Component {
   }
   
   handleChange = e => {
-    console.log(process.env);
+    // console.log(process.env);
     this.setState({
       registration: {
-        ...this.registration,
+        ...this.state.registration,
         [e.target.name]: e.target.value
       }
-    })
-  }
+    });
+    console.log(this.state.registration);
+  };
 
   register = e => {
     // class property called "register"
@@ -37,6 +38,7 @@ class Register extends Component {
     this.props
       .register(this.state.registration) // action creator called "register"
       .then(() => this.props.history.push('/login'));
+    console.log(this.state.registration);
   };
 
   render() {
@@ -78,11 +80,10 @@ class Register extends Component {
   }
 }
 
-const mapStateToProps = state => {
-  return {
-    isRegistered: state.isRegistered
-  };
-};
+const mapStateToProps = ({error, isRegistered}) => ({
+  error,
+  isRegistered
+});
 
 export default connect(
   mapStateToProps,

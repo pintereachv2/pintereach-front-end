@@ -17,14 +17,13 @@ class Login extends React.Component {
   };
 
   handleChange = e => {
-    console.log(process.env);
+    // console.log(process.env);
     this.setState({
       credentials: {
         ...this.state.credentials,
         [e.target.name]: e.target.value
       }
     });
-    console.log(this.state.credentials);
   };
 
   login = e => {
@@ -33,7 +32,6 @@ class Login extends React.Component {
     this.props
       .login(this.state.credentials) // action creator called "login"
       .then(() => this.props.history.push('/'));
-    console.log(this.state.credentials)
   };
 
   render() {
@@ -73,11 +71,10 @@ class Login extends React.Component {
 }
 
 
-const mapStateToProps = state => {
-  return {
-    isLoggingIn: state.isLoggingIn
-  };
-};
+const mapStateToProps = ({error, isLoggingIn}) => ({
+  error,
+  isLoggingIn
+});
 
 export default connect(
   mapStateToProps,

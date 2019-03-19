@@ -15,12 +15,12 @@ export const REGISTER_START = "REGISTER_START";
 // export const TOGGLE_UPDATE_ARTICLE = 'TOGGLE_UPDATE_ARTICLE';
 // export const ERROR = 'ERROR';
 
-const URL = env[process.env.environment].url
+// const URL = env[process.env.environment].url
 
 export const login = creds => dispatch => {
-    console.log(URL);
+    // console.log(URL);
   dispatch({ type: LOGIN_START });
-  return axios.post(`${URL}/api/login`, creds)
+  return axios.post("http://localhost:4000/api/login", creds)
   .then(res => {
     localStorage.setItem("jwt", res.data.token);
   });
@@ -28,7 +28,7 @@ export const login = creds => dispatch => {
 
 export const register = creds => dispatch => {
     dispatch({ type: REGISTER_START });
-    return axios.post(`${URL}/api/login`, creds)
+    return axios.post("http://localhost:4000/api/register", creds)
     .then(res => {
       localStorage.setItem("jwt", res.data.token);
     });
