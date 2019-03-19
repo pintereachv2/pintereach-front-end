@@ -1,4 +1,4 @@
-import React from 'reactn';
+import React, { setGlobal } from 'reactn';
 import { connect } from 'react-redux';
 import Loader from 'react-loader-spinner';
 import { Button, Form, Label, Input } from 'reactstrap';
@@ -34,6 +34,11 @@ class Login extends React.Component {
       .login(this.state.credentials) // action creator called "login"
       .then(() => this.props.history.push('/'));
     console.log(this.state.credentials)
+    const creds = this.state.credentials
+    axios.post(`${URL}/api/login`, creds)
+      .then(res => {
+        localStorage.setItem("jwt", res.data.token);
+      });
   };
 
   render() {
@@ -62,8 +67,8 @@ class Login extends React.Component {
               {this.props.isLoggingIn ? (
                 <Loader type="ThreeDots" color="#1f2a38" height="12" width="26" />
               ) : (
-                'Log in'
-              )}
+                  'Log in'
+                )}
             </Button>
           </Form>
         </div>

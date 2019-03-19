@@ -1,4 +1,4 @@
-import React, { Component } from 'reactn';
+import React, { Component, setGlobal } from 'reactn';
 import { connect } from 'react-redux';
 import { Button, Form, FormGroup, Label, Input } from 'reactstrap';
 import { Link } from 'react-router-dom';
@@ -20,7 +20,7 @@ class Register extends Component {
       password: ''
     }
   }
-  
+
   handleChange = e => {
     console.log(process.env);
     this.setState({
@@ -37,43 +37,48 @@ class Register extends Component {
     this.props
       .register(this.state.registration) // action creator called "register"
       .then(() => this.props.history.push('/login'));
+    const creds = this.state.registration
+    axios.post(`${URL}/api/login`, creds)
+      .then(res => {
+        localStorage.setItem("jwt", res.data.token);
+      });
   };
 
   render() {
     return (
-      
-        <div className="App">
-          <Navigation />
-          <header className="App-header">
-            <h1>Pintereach</h1>
-            <p>Easily organize research articles from the web</p>
-            <Form onSubmit={this.register}>
-              <FormGroup>
-                <Label for="email">Email</Label>
-                <Input type="email" name="email" id="sign-up-form email" placeholder="Email Address" value={this.state.registration.email} onChange={this.handleChange} />
-              </FormGroup>
-              <FormGroup>
-                <Label for="username">Username</Label>
-                <Input type="text" name="username" id="sign-up-form username" placeholder="Username" value={this.state.registration.username} onChange={this.handleChange} />
-              </FormGroup>
-              <FormGroup>
-                <Label for="password">Password</Label>
-                <Input type="password" name="password" id="sign-up-form password" placeholder="Password" value={this.state.registration.password} onChange={this.handleChange} />
-              </FormGroup>
-             
-                <Button>
-                {this.props.isRegistered ? (
+
+      <div className="App">
+        <Navigation />
+        <header className="App-header">
+          <h1>Pintereach</h1>
+          <p>Easily organize research articles from the web</p>
+          <Form onSubmit={this.register}>
+            <FormGroup>
+              <Label for="email">Email</Label>
+              <Input type="email" name="email" id="sign-up-form email" placeholder="Email Address" value={this.state.registration.email} onChange={this.handleChange} />
+            </FormGroup>
+            <FormGroup>
+              <Label for="username">Username</Label>
+              <Input type="text" name="username" id="sign-up-form username" placeholder="Username" value={this.state.registration.username} onChange={this.handleChange} />
+            </FormGroup>
+            <FormGroup>
+              <Label for="password">Password</Label>
+              <Input type="password" name="password" id="sign-up-form password" placeholder="Password" value={this.state.registration.password} onChange={this.handleChange} />
+            </FormGroup>
+
+            <Button>
+              {this.props.isRegistered ? (
                 <Loader type="ThreeDots" color="#1f2a38" height="12" width="26" />
               ) : (
-                'Sign Up'
-              )}
-                </Button>
-              
-            </Form>
-            <p>Already a member? <Link to="/login">Log In</Link></p>
-          </header>
-        </div>
-      
+                  'Sign Up'
+                )}
+            </Button>
+
+          </Form>
+          <p>Already a member? <Link to="/login">Log In</Link></p>
+        </header>
+      </div>
+
     );
   }
 }

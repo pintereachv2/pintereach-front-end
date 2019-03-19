@@ -1,4 +1,4 @@
-import React from 'reactn';
+import React, { setGlobal } from 'reactn';
 import ReactDOM from 'react-dom';
 import { createStore, applyMiddleware } from 'redux';
 import { Provider } from 'react-redux';
@@ -11,7 +11,14 @@ import reducer from './reducers'
 require('dotenv').config();
 
 
-const store = createStore(reducer, applyMiddleware(thunk));
+// const store = createStore(reducer, applyMiddleware(thunk));
+setGlobal({
+    login: {
+        error: '',
+        isRegistered: false,
+        isLoggingIn: false
+    }
+})
 
 const rootElement = document.getElementById('root');
 ReactDOM.render(
