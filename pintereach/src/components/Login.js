@@ -1,14 +1,14 @@
 import React, { setGlobal } from 'reactn';
 import axios from 'axios'
-import { connect } from 'react-redux';
+// import { connect } from 'react-redux';
 import Loader from 'react-loader-spinner';
 import { Button, Form, Label, Input } from 'reactstrap';
-
-import { login } from '../actions';
+import { withRouter } from 'react-router'
+// import { login } from '../actions';
 import Navigation from './Navigation';
 
 import '../App.css';
-
+const URL = 'localhost:4000' //env[process.env.environment].url
 class Login extends React.Component {
   state = {
     credentials: {
@@ -30,17 +30,26 @@ class Login extends React.Component {
   login = e => {
     // class property called "login"
     e.preventDefault();
-    this.props
-      .login(this.state.credentials) // action creator called "login"
-      .then(() => this.props.history.push('/'));
+    // this.props
+    //   .login(this.state.credentials) // action creator called "login"
+    //   .then(() => this.props.history.push('/'));
 
     console.log(this.state.credentials)
     const creds = this.state.credentials
+    // setGlobal(axios.post(`${URL}/api/login`, creds)
+    //   .then(res => {
+    //     setGlobal({isLoggingIn: true})
+    //     localStorage.setItem("jwt", res.data.token);
+    //   }));
+
+    const URL = 'http://localhost:4000' //env[process.env.environment].url
     axios.post(`${URL}/api/login`, creds)
       .then(res => {
-        setGlobal({isLoggingIn: true})
+        setGlobal({isLoggedIn:true})
         localStorage.setItem("jwt", res.data.token);
-      });
+        this.props.history.push('/login')
+      }).catch(err => console.log(err));
+
 
   };
 
@@ -81,11 +90,11 @@ class Login extends React.Component {
 }
 
 
-const mapStateToProps = ({error, isLoggingIn}) => ({
-  error,
-  isLoggingIn
-});
-
+// const mapStateToProps = ({error, isLoggingIn}) => ({
+//   error,
+//   isLoggingIn
+// });
+Login = withRouter(Login)
 export default Login
 
 // export default connect(
