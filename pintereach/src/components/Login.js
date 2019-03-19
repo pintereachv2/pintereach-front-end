@@ -3,7 +3,7 @@ import axios from 'axios'
 // import { connect } from 'react-redux';
 import Loader from 'react-loader-spinner';
 import { Button, Form, Label, Input } from 'reactstrap';
-
+import { withRouter } from 'react-router'
 // import { login } from '../actions';
 import Navigation from './Navigation';
 
@@ -94,7 +94,7 @@ class Login extends React.Component {
 //   error,
 //   isLoggingIn
 // });
-
+Login = withRouter(Login)
 export default Login
 
 // export default connect(
