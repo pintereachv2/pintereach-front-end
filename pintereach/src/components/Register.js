@@ -1,5 +1,5 @@
 import React, { Component, setGlobal } from 'reactn';
-import { connect } from 'react-redux';
+// import { connect } from 'react-redux';
 import { Button, Form, FormGroup, Label, Input } from 'reactstrap';
 import { Link } from 'react-router-dom';
 import Loader from 'react-loader-spinner';
@@ -35,16 +35,17 @@ class Register extends Component {
   register = e => {
     // class property called "register"
     e.preventDefault();
-    this.props
-      .register(this.state.registration) // action creator called "register"
-      .then(() => this.props.history.push('/login'));
+    // this.props
+    //   .register(this.state.registration) // action creator called "register"
+    //   .then();
 
     const creds = this.state.registration
     axios.post(`${URL}/api/login`, creds)
       .then(res => {
         setGlobal({isRegistered:true})
         localStorage.setItem("jwt", res.data.token);
-      });
+        this.props.history.push('/login')
+      }).then();
 
     console.log(this.state.registration);
 
@@ -89,10 +90,10 @@ class Register extends Component {
   }
 }
 
-const mapStateToProps = ({error, isRegistered}) => ({
-  error,
-  isRegistered
-});
+// const mapStateToProps = ({error, isRegistered}) => ({
+//   error,
+//   isRegistered
+// });
 
 export default Register
 // export default connect(

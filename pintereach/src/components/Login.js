@@ -1,10 +1,10 @@
 import React, { setGlobal } from 'reactn';
 import axios from 'axios'
-import { connect } from 'react-redux';
+// import { connect } from 'react-redux';
 import Loader from 'react-loader-spinner';
 import { Button, Form, Label, Input } from 'reactstrap';
 
-import { login } from '../actions';
+// import { login } from '../actions';
 import Navigation from './Navigation';
 
 import '../App.css';
@@ -30,17 +30,17 @@ class Login extends React.Component {
   login = e => {
     // class property called "login"
     e.preventDefault();
-    this.props
-      .login(this.state.credentials) // action creator called "login"
-      .then(() => this.props.history.push('/'));
+    // this.props
+    //   .login(this.state.credentials) // action creator called "login"
+    //   .then(() => this.props.history.push('/'));
 
     console.log(this.state.credentials)
     const creds = this.state.credentials
-    axios.post(`${URL}/api/login`, creds)
+    setGlobal(axios.post(`${URL}/api/login`, creds)
       .then(res => {
         setGlobal({isLoggingIn: true})
         localStorage.setItem("jwt", res.data.token);
-      });
+      }));
 
   };
 
@@ -81,10 +81,10 @@ class Login extends React.Component {
 }
 
 
-const mapStateToProps = ({error, isLoggingIn}) => ({
-  error,
-  isLoggingIn
-});
+// const mapStateToProps = ({error, isLoggingIn}) => ({
+//   error,
+//   isLoggingIn
+// });
 
 export default Login
 
