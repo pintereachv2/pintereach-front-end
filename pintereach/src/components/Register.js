@@ -9,8 +9,8 @@ import Navigation from './Navigation';
 // import Login from './components/Login';
 // import Home from './components/Home';
 // import PrivateRoute from './components/PrivateRoute';
-import { register } from '../actions';
-import { env } from '../environment';
+// import { register } from '../actions';
+// import { env } from '../environment';
 
 class Register extends Component {
   state = {
