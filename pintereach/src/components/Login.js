@@ -18,14 +18,13 @@ class Login extends React.Component {
   };
 
   handleChange = e => {
-    console.log(process.env);
+    // console.log(process.env);
     this.setState({
       credentials: {
         ...this.state.credentials,
         [e.target.name]: e.target.value
       }
     });
-    console.log(this.state.credentials);
   };
 
   login = e => {
@@ -34,6 +33,7 @@ class Login extends React.Component {
     this.props
       .login(this.state.credentials) // action creator called "login"
       .then(() => this.props.history.push('/'));
+
     console.log(this.state.credentials)
     const creds = this.state.credentials
     axios.post(`${URL}/api/login`, creds)
@@ -41,6 +41,7 @@ class Login extends React.Component {
         setGlobal({isLoggingIn: true})
         localStorage.setItem("jwt", res.data.token);
       });
+
   };
 
   render() {
@@ -80,11 +81,10 @@ class Login extends React.Component {
 }
 
 
-const mapStateToProps = state => {
-  return {
-    isLoggingIn: state.isLoggingIn
-  };
-};
+const mapStateToProps = ({error, isLoggingIn}) => ({
+  error,
+  isLoggingIn
+});
 
 export default Login
 
