@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import Loader from 'react-loader-spinner';
-import { Button, Form, FormGroup, Label, Input } from 'reactstrap';
+import { Button, Form, Label, Input } from 'reactstrap';
 
 import { login } from '../actions';
 import Navigation from './Navigation';

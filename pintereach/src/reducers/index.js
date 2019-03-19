@@ -1,31 +1,10 @@
-import {
-    LOGIN_START,
-    REGISTER_START
-  } from '../actions';
-  
-  const initialState = {
-    error: '',
-    isRegistered: false,
-    isLoggingIn: false
-  };
+import { combineReducers } from 'redux';
+import { loginReducer } from './loginReducer';
+// import { articleReducer } from './articleReducer';
+// import { singleArticleReducer } from './singleArticleReducer';
 
-  const reducer = (state = initialState, action) => {
-    switch (action.type) {
-      case LOGIN_START: {
-        return {
-          ...state,
-          isLoggingIn: true
-        };
-      }
-      case REGISTER_START: {
-        return {
-          ...state,
-          isRegistered: true
-        };
-      }
-      default:
-        return state;
-    }
-  };
-  
-  export default reducer;
+export default combineReducers({
+  loginReducer,
+  // articleReducer,
+  // singleArticleReducer
+});
