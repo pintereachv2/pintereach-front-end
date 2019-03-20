@@ -6,7 +6,6 @@ import Loader from 'react-loader-spinner';
 import axios from 'axios'
 
 import Navigation from './Navigation';
-
 class Register extends Component {
   state = {
     registration: {
@@ -29,7 +28,8 @@ class Register extends Component {
 
   register = e => {
     e.preventDefault();
-    const URL = 'http://localhost:4000' 
+    // const URL = 'http://localhost:4000' 
+    let URL = 'https://pintereacher.herokuapp.com'
     const creds = this.state.registration
     axios.post(`${URL}/api/register`, creds)
       .then(res => {

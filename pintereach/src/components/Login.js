@@ -7,7 +7,7 @@ import { withRouter } from 'react-router';
 import Navigation from './Navigation';
 
 import '../App.css';
-
+const URL = 'localhost:4000' //env[process.env.environment].url
 class Login extends React.Component {
   state = {
     credentials: {
@@ -29,10 +29,19 @@ class Login extends React.Component {
     e.preventDefault();
     const URL = 'http://localhost:4000' //env[process.env.environment].url
     const creds = this.state.credentials
-    axios.post(`${URL}/api/login`, creds)
+    // setGlobal(axios.post(`${URL}/api/login`, creds)
+    //   .then(res => {
+    //     setGlobal({isLoggingIn: true})
+    //     localStorage.setItem("jwt", res.data.token);
+    //   }));
+
+    // const URL = 'http://localhost:4000' //env[process.env.environment].url
+    axios.post(`https://pintereacher.herokuapp.com/api/login`, creds)
       .then(res => {
         setGlobal({isLoggingIn:true})
-        localStorage.setItem("jwt", res.data.token);
+        const AUTH_TOKEN = res.data.token
+        axios.defaults.headers.common['Authorization'] = AUTH_TOKEN;
+        localStorage.setItem("jwt", AUTH_TOKEN);
         this.props.history.push('/home')
       }).catch(err => console.log(err));
     console.log(this.state.credentials);
