@@ -1,5 +1,5 @@
 import React, { setGlobal } from 'reactn';
-import { TabContent, TabPane, Nav, NavItem, NavLink, Card, Button, CardTitle, CardText, Row, Col } from 'reactstrap';
+import { TabContent, Nav, NavItem, NavLink } from 'reactstrap';
 import classnames from 'classnames';
 import { withRouter } from 'react-router';
 import axios from 'axios';
@@ -18,25 +18,26 @@ class Tabs extends React.Component {
     }
 
     componentDidMount() {
-        const options = {
-            headers: {
-              Authentication: localStorage.getItem('jwt')
-            },
-        };
-        this.setGlobal(
-            axios.get('https://pintereacher.herokuapp.com/api/articles/id', options)
+        axios.defaults.headers.common['Authorization'] = res.data.token;
+        const token = window.localStorage.setItem(res.data.token)
+
+        // const options = {
+        // headers: {
+        //   Authentication: token,
+        //     },
+        // };
+        // console.log(options);
+        setGlobal(
+            axios.get('http://localhost:4000/api/articles')
                 .then((res) => {
                     console.log(res)
                   return res.data
                 })
-
-
                 .then(articles => ({ articles }))
-
                 .catch(err => ({ error: err }))
                 
         );
-        console.log(this.global.articles);
+        // console.log(this.global.articles);
     }
 
     toggle(tab) {
@@ -94,13 +95,10 @@ class Tabs extends React.Component {
                     </NavItem>
                 </Nav>
                 <TabContent>
-                    {/* {this.global.articles.map((article, i) => (
+                    {/* {this.global.articles.map(article => (
                         <Cards 
-                        key={i} 
-                        title={article.title}
-                        content={article.content}
-                        abstract={article.abstract}
-                        category={article.category}
+                        key={article.title} 
+                        {...article}
                         />
                     ))} */}
                     

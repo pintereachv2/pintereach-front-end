@@ -1,4 +1,4 @@
-import React, { setGlobal } from 'reactn';
+import React from 'reactn';
 import {
   Collapse,
   Navbar,
@@ -11,9 +11,8 @@ import {
   DropdownToggle,
   DropdownMenu,
   DropdownItem } from 'reactstrap';
-import Home from './Home';
 import { withRouter } from 'react-router';
-import axios from 'axios';
+
 
 export default class HomeNavigation extends React.Component {
   constructor(props) {
@@ -46,7 +45,7 @@ export default class HomeNavigation extends React.Component {
                   Article Options
                 </DropdownToggle>
                 <DropdownMenu right>
-                  <DropdownItem>
+                  <DropdownItem href="/new-article">
                     Add New Article
                   </DropdownItem>
                   <DropdownItem>

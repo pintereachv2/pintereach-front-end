@@ -11,7 +11,7 @@ setGlobal({
     error: '',
     isRegistered: false,
     isLoggingIn: false,
-    gettingArticles: false,
+    gettingArticles: true,
     updatingArticles: false,
     creatingArticles: false,
     deletingArticles: false,
