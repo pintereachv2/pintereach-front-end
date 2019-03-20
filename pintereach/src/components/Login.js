@@ -1,6 +1,5 @@
 import React, { setGlobal } from 'reactn';
 import axios from 'axios'
-// import { connect } from 'react-redux';
 import Loader from 'react-loader-spinner';
 import { Button, Form, Label, Input } from 'reactstrap';
 import { withRouter } from 'react-router'

@@ -1,5 +1,4 @@
 import React, { Component, setGlobal } from 'reactn';
-// import { connect } from 'react-redux';
 import { Button, Form, FormGroup, Label, Input } from 'reactstrap';
 import { Link } from 'react-router-dom';
 import { withRouter } from 'react-router'
