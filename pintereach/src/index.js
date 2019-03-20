@@ -1,30 +1,33 @@
 import React, { setGlobal } from 'reactn';
 import ReactDOM from 'react-dom';
-// import { createStore, applyMiddleware } from 'redux';
-// import { Provider } from 'react-redux';
-// import thunk from 'redux-thunk';
-
+import axios from 'axios'
 import 'bootstrap/dist/css/bootstrap.css';
 import './index.css';
 import App from './App';
-// import reducer from './reducers'
+
 require('dotenv').config();
 
+// axios.defaults.baseURL = 'localhost:4000';
 
-// const store = createStore(reducer, applyMiddleware(thunk));
+// get auth header from localstorage and put it in axios headers
+const AUTH_TOKEN = localStorage.getItem('jwt')
+if (AUTH_TOKEN) {
+    axios.defaults.headers.common['Authorization'] = AUTH_TOKEN;
+}
+
 setGlobal({
     error: '',
     isRegistered: false,
-    isLoggingIn: false
+    isLoggingIn: false,
+    gettingArticles: false,
+    updatingArticles: false,
+    creatingArticles: false,
+    deletingArticles: false,
+    articles: []
 })
-// login: {
-// }
 
 const rootElement = document.getElementById('root');
 ReactDOM.render(
     <App />,
-    rootElement
-    );
-    
-    // <Provider store={store}>
-    // </Provider>,
+rootElement
+);

@@ -1,5 +1,4 @@
 // import React, { Component } from 'react';
-// import { connect } from 'react-redux';
 // import { Button, Form, FormGroup, Label, Input } from 'reactstrap';
 // import { createArticle } from '../actions';
 

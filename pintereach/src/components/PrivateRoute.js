@@ -1,13 +1,14 @@
 import React from 'reactn';
-import { Route, Redirect, withRouter } from 'react-router-dom';
-// import { connect } from 'react-redux';
+import { Route, Redirect } from 'react-router-dom';
+import { withRouter } from 'react-router';
+
 
 const PrivateRoute = ({ component: Component, ...rest }) => {
     return (
         <Route 
         {...rest} 
         render={() => {
-            if (localStorage.getItem('token')) {
+            if (localStorage.getItem('jwt')) {
                 return <Component />
             } else {
                 return <Redirect to='/login' />
@@ -17,15 +18,6 @@ const PrivateRoute = ({ component: Component, ...rest }) => {
     );
 }
 
-// const mapStateToProps = ({errorStatusCode}) => ({
-//     errorStatusCode: state.errorStatusCode
-//   });
-
 export default PrivateRoute
-//   export default withRouter(
-//     connect(
-//       mapStateToProps,
-//       {}
-//     )(PrivateRoute)
-//   );
+
 
