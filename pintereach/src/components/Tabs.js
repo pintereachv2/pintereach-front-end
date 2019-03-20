@@ -18,15 +18,15 @@ class Tabs extends React.Component {
     }
 
     componentDidMount() {
-        axios.defaults.headers.common['Authorization'] = res.data.token;
-        const token = window.localStorage.setItem(res.data.token)
+        // axios.defaults.headers.common['Authorization'] = res.data.token;
+        const token = window.localStorage.getItem('jwt')
 
-        // const options = {
-        // headers: {
-        //   Authentication: token,
-        //     },
-        // };
-        // console.log(options);
+        const options = {
+        headers: {
+          Authentication: token,
+            },
+        };
+        console.log(token);
         setGlobal(
             axios.get('http://localhost:4000/api/articles')
                 .then((res) => {
@@ -37,7 +37,7 @@ class Tabs extends React.Component {
                 .catch(err => ({ error: err }))
                 
         );
-        // console.log(this.global.articles);
+        console.log(this.global.articles);
     }
 
     toggle(tab) {
