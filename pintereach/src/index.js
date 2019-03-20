@@ -10,7 +10,12 @@ require('dotenv').config();
 setGlobal({
     error: '',
     isRegistered: false,
-    isLoggingIn: false
+    isLoggingIn: false,
+    gettingArticles: false,
+    updatingArticles: false,
+    creatingArticles: false,
+    deletingArticles: false,
+    articles: []
 })
 
 const rootElement = document.getElementById('root');

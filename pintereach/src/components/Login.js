@@ -1,8 +1,8 @@
 import React, { setGlobal } from 'reactn';
-import axios from 'axios'
+import axios from 'axios';
 import Loader from 'react-loader-spinner';
 import { Button, Form, Label, Input } from 'reactstrap';
-import { withRouter } from 'react-router'
+import { withRouter } from 'react-router';
 
 import Navigation from './Navigation';
 
