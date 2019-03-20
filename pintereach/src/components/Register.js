@@ -4,14 +4,8 @@ import { Link } from 'react-router-dom';
 import { withRouter } from 'react-router'
 import Loader from 'react-loader-spinner';
 import axios from 'axios'
-// import './App.css';
+
 import Navigation from './Navigation';
-// import Login from './components/Login';
-// import Home from './components/Home';
-// import PrivateRoute from './components/PrivateRoute';
-// import { register } from '../actions';
-// import { env } from '../environment';
-// const URL = 'http://localhost:4000' //env[process.env.environment].url
 class Register extends Component {
   state = {
     registration: {
@@ -19,10 +13,10 @@ class Register extends Component {
       username: '',
       password: ''
     }
+
   }
 
   handleChange = e => {
-    // console.log(process.env);
     this.setState({
       registration: {
         ...this.state.registration,
@@ -33,12 +27,8 @@ class Register extends Component {
   };
 
   register = e => {
-    // class property called "register"
     e.preventDefault();
-    // this.props
-    //   .register(this.state.registration) // action creator called "register"
-    //   .then();
-    const URL = 'http://localhost:4000' //env[process.env.environment].url
+    const URL = 'http://localhost:4000' 
     const creds = this.state.registration
     axios.post(`${URL}/api/register`, creds)
       .then(res => {
@@ -46,9 +36,7 @@ class Register extends Component {
         localStorage.setItem("jwt", res.data.token);
         this.props.history.push('/login')
       }).catch(err => console.log(err));
-
     console.log(this.state.registration);
-
   };
 
   render() {
@@ -90,13 +78,5 @@ class Register extends Component {
   }
 }
 
-// const mapStateToProps = ({error, isRegistered}) => ({
-//   error,
-//   isRegistered
-// });
 Register = withRouter(Register)
 export default Register
-// export default connect(
-//   mapStateToProps,
-//   { register }
-// )(Register);

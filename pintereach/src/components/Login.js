@@ -1,9 +1,9 @@
 import React, { setGlobal } from 'reactn';
-import axios from 'axios'
+import axios from 'axios';
 import Loader from 'react-loader-spinner';
 import { Button, Form, Label, Input } from 'reactstrap';
-import { withRouter } from 'react-router'
-// import { login } from '../actions';
+import { withRouter } from 'react-router';
+
 import Navigation from './Navigation';
 
 import '../App.css';
@@ -17,7 +17,6 @@ class Login extends React.Component {
   };
 
   handleChange = e => {
-    // console.log(process.env);
     this.setState({
       credentials: {
         ...this.state.credentials,
@@ -27,13 +26,8 @@ class Login extends React.Component {
   };
 
   login = e => {
-    // class property called "login"
     e.preventDefault();
-    // this.props
-    //   .login(this.state.credentials) // action creator called "login"
-    //   .then(() => this.props.history.push('/'));
-
-    console.log(this.state.credentials)
+    const URL = 'http://localhost:4000' //env[process.env.environment].url
     const creds = this.state.credentials
     // setGlobal(axios.post(`${URL}/api/login`, creds)
     //   .then(res => {
@@ -44,12 +38,11 @@ class Login extends React.Component {
     const URL = 'http://localhost:4000' //env[process.env.environment].url
     axios.post(`${URL}/api/login`, creds)
       .then(res => {
-        setGlobal({isLoggedIn:true})
+        setGlobal({isLoggingIn:true})
         localStorage.setItem("jwt", res.data.token);
-        this.props.history.push('/login')
+        this.props.history.push('/home')
       }).catch(err => console.log(err));
-
-
+    console.log(this.state.credentials);
   };
 
   render() {
@@ -88,15 +81,5 @@ class Login extends React.Component {
   }
 }
 
-
-// const mapStateToProps = ({error, isLoggingIn}) => ({
-//   error,
-//   isLoggingIn
-// });
-Login = withRouter(Login)
-export default Login
-
-// export default connect(
-//   mapStateToProps,
-//   { login }
-// )(Login);
+Login = withRouter(Login);
+export default Login;
