@@ -105,7 +105,7 @@ class Tabs extends React.Component {
                     </NavItem>
                 </Nav>
                 <TabContent>
-                    {/* {this.global.articles.map((article, i) => (
+                    {/* { this.global.articles.map((article, i) => (
                         <Cards 
                         key={i} 
                         title={article.title}
@@ -113,7 +113,7 @@ class Tabs extends React.Component {
                         abstract={article.abstract}
                         category={article.category}
                         />
-                    ))} */}
+                    )) } */}
                     
                 </TabContent>
             </div>
