@@ -5,7 +5,7 @@ import { withRouter } from 'react-router';
 import axios from 'axios';
 
 import Cards from './Cards';
-
+let URL = 'https://pintereacher.herokuapp.com/'
 class Tabs extends React.Component {
     constructor(props) {
     super(props);
@@ -18,18 +18,29 @@ class Tabs extends React.Component {
     }
 
     componentDidMount() {
+        const token = window.localStorage.getItem('jwt')
         const options = {
             headers: {
-              Authentication: localStorage.getItem('jwt')
+              Authentication: token
             },
         };
-        this.setGlobal(
-            axios.get('https://pintereacher.herokuapp.com/api/articles/id', options)
+            axios.get('https://pintereacher.herokuapp.com/api/articles/')
+                .then((res) => {
+                    console.log(res)
+                    this.setState({articles: res.data})
+                  return res.data
+                })
+
+                .then(articles => ({ articles }))
+
+                .catch(err => ({ error: err }))
+ 
+        setGlobal(
+            axios.get('https://pintereacher.herokuapp.com/api/articles/', options)
                 .then((res) => {
                     console.log(res)
                   return res.data
                 })
-
 
                 .then(articles => ({ articles }))
 

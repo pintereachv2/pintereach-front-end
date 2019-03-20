@@ -28,7 +28,8 @@ class Register extends Component {
 
   register = e => {
     e.preventDefault();
-    const URL = 'http://localhost:4000' 
+    // const URL = 'http://localhost:4000' 
+    let URL = 'https://pintereacher.herokuapp.com'
     const creds = this.state.registration
     axios.post(`${URL}/api/register`, creds)
       .then(res => {

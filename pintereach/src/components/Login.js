@@ -35,11 +35,13 @@ class Login extends React.Component {
     //     localStorage.setItem("jwt", res.data.token);
     //   }));
 
-    const URL = 'http://localhost:4000' //env[process.env.environment].url
-    axios.post(`${URL}/api/login`, creds)
+    // const URL = 'http://localhost:4000' //env[process.env.environment].url
+    axios.post(`https://pintereacher.herokuapp.com/api/login`, creds)
       .then(res => {
         setGlobal({isLoggingIn:true})
-        localStorage.setItem("jwt", res.data.token);
+        const AUTH_TOKEN = res.data.token
+        axios.defaults.headers.common['Authorization'] = AUTH_TOKEN;
+        localStorage.setItem("jwt", AUTH_TOKEN);
         this.props.history.push('/home')
       }).catch(err => console.log(err));
     console.log(this.state.credentials);
