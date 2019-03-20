@@ -18,9 +18,7 @@ class Tabs extends React.Component {
     }
 
     componentDidMount() {
-        // axios.defaults.headers.common['Authorization'] = res.data.token;
         const token = window.localStorage.getItem('jwt')
-
         const options = {
         headers: {
           Authentication: token,
@@ -28,7 +26,7 @@ class Tabs extends React.Component {
         };
         console.log(token);
         setGlobal(
-            axios.get('http://localhost:4000/api/articles')
+            axios.get('http://localhost:4000/api/articles', options)
                 .then((res) => {
                     console.log(res)
                   return res.data
