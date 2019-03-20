@@ -9,6 +9,12 @@ require('dotenv').config();
 
 // axios.defaults.baseURL = 'localhost:4000';
 
+// get auth header from localstorage and put it in axios headers
+const AUTH_TOKEN = localStorage.getItem('jwt')
+if (AUTH_TOKEN) {
+    axios.defaults.headers.common['Authorization'] = AUTH_TOKEN;
+}
+
 setGlobal({
     error: '',
     isRegistered: false,
