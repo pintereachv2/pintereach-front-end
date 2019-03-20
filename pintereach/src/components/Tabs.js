@@ -1,5 +1,5 @@
 import React, { setGlobal } from 'reactn';
-import { TabContent, TabPane, Nav, NavItem, NavLink, Card, Button, CardTitle, CardText, Row, Col } from 'reactstrap';
+import { TabContent, TabPane, Nav, NavItem, NavLink, Button, Card, CardTitle, CardText, Row, Col } from 'reactstrap';
 import classnames from 'classnames';
 import { withRouter } from 'react-router';
 import axios from 'axios';
@@ -8,12 +8,12 @@ import Cards from './Cards';
 let URL = 'https://pintereacher.herokuapp.com/'
 class Tabs extends React.Component {
     constructor(props) {
-    super(props);
+        super(props);
 
-    this.toggle = this.toggle.bind(this);
-    this.state = {
-        selectedTab: 'all',
-        activeTab: '1'
+        this.toggle = this.toggle.bind(this);
+        this.state = {
+            selectedTab: 'all',
+            activeTab: '1'
         };
     }
 
@@ -21,41 +21,41 @@ class Tabs extends React.Component {
         const token = window.localStorage.getItem('jwt')
         const options = {
             headers: {
-              Authentication: token
+                Authentication: token
             },
         };
-            axios.get('https://pintereacher.herokuapp.com/api/articles/')
-                .then((res) => {
-                    console.log(res)
-                    this.setState({articles: res.data})
-                  return res.data
-                })
+        axios.get('https://pintereacher.herokuapp.com/api/articles/')
+            .then((res) => {
+                console.log(res)
+                this.setState({ articles: res.data })
+                return res.data
+            })
 
-                .then(articles => ({ articles }))
+            .then(articles => ({ articles }))
 
-                .catch(err => ({ error: err }))
- 
+            .catch(err => ({ error: err }))
+
         setGlobal(
             axios.get('https://pintereacher.herokuapp.com/api/articles/', options)
                 .then((res) => {
                     console.log(res)
-                  return res.data
+                    return res.data
                 })
 
                 .then(articles => ({ articles }))
 
                 .catch(err => ({ error: err }))
-                
+
         );
         console.log(this.global.articles);
     }
 
     toggle(tab) {
-    if (this.state.activeTab !== tab) {
-        this.setState({
-        activeTab: tab
-        });
-    }
+        if (this.state.activeTab !== tab) {
+            this.setState({
+                activeTab: tab
+            });
+        }
     }
 
     // filterCards = () => {
@@ -71,7 +71,7 @@ class Tabs extends React.Component {
     //       return newArray;
     //     }
     //   };
-    
+
 
 
     render() {
@@ -82,40 +82,46 @@ class Tabs extends React.Component {
                 <Nav tabs>
                     <NavItem>
                         <NavLink
-                        className={classnames({ active: this.state.activeTab === '1' })}
-                        onClick={() => { this.toggle('1'); }}
+                            className={classnames({ active: this.state.activeTab === '1' })}
+                            onClick={() => { this.toggle('1'); }}
                         >
-                        All
+                            All
                         </NavLink>
                     </NavItem>
                     <NavItem>
                         <NavLink
-                        className={classnames({ active: this.state.activeTab === '2' })}
-                        onClick={() => { this.toggle('2'); }}
+                            className={classnames({ active: this.state.activeTab === '2' })}
+                            onClick={() => { this.toggle('2'); }}
                         >
-                        Tech
+                            Tech
                         </NavLink>
                     </NavItem>
                     <NavItem>
                         <NavLink
-                        className={classnames({ active: this.state.activeTab === '3' })}
-                        onClick={() => { this.toggle('3'); }}
+                            className={classnames({ active: this.state.activeTab === '3' })}
+                            onClick={() => { this.toggle('3'); }}
                         >
-                        Business
+                            Business
                         </NavLink>
                     </NavItem>
                 </Nav>
                 <TabContent>
-                    { this.global.articles.map((article, i) => (
-                        <Card 
-                        key={i} 
-                        title={article.title}
-                        content={article.content}
-                        abstract={article.abstract}
-                        category={article.category}
-                        />
-                    )) }
-                    
+                    {this.global.articles.map((article, i) => (
+                        <a href={article.content}>
+                        <Card
+                            key={i}
+                            title={article.title}
+                            content={article.content}
+                            abstract={article.abstract}
+                            category={article.category}
+                        >
+                            <CardTitle>{article.title}</CardTitle>
+                            {/* <CardSubtitle>article.category</CardSubtitle> */}
+                            <CardText>{article.abstract}</CardText>
+                            <Button>Button</Button>
+                        </Card></a>
+                    ))}
+
                 </TabContent>
             </div>
         );

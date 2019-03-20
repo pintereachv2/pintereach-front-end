@@ -40,8 +40,16 @@ class Login extends React.Component {
       .then(res => {
         setGlobal({isLoggingIn:true})
         const AUTH_TOKEN = res.data.token
+        const userId = res.data.id
+
         axios.defaults.headers.common['Authorization'] = AUTH_TOKEN;
+
         localStorage.setItem("jwt", AUTH_TOKEN);
+
+        setGlobal({
+          userId
+        })
+        console.log(this.global)
         this.props.history.push('/home')
       }).catch(err => console.log(err));
     console.log(this.state.credentials);
