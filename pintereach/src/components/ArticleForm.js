@@ -2,18 +2,30 @@ import React, { Component } from 'react';
 import { Button, Form, Label, Input } from 'reactstrap';
 // import { createArticle } from '../actions';
 import { withRouter } from 'react-router';
+import Loader from 'react-loader-spinner';
 
 class ArticleForm extends Component {
   // todo update state if article prop is passed down
-  state = {
-    title: '',
-    content: '',
-    abstract: '',
-    category: ''
-  };
+  constructor(props) {
+    super(props)
+    if (props.article) {
+      this.state = props.article
+    } else {
+      this.state = {
+          title: '',
+          content: '',
+          abstract: '',
+          category: '',
+      }
+    }
+  }
 
   handleInputChange = event => {
-    this.setState({ [event.target.name]: event.target.value });
+    console.log(event)
+    this.setState({
+      [event.target.name]: event.target.value
+    }
+    );
   };
 
   handleAddArticle = _ => {
@@ -46,7 +58,7 @@ class ArticleForm extends Component {
           placeholder="Content"
           onChange={this.handleInputChange}
         />
-        <Label for="Abstract">Abstract (opotional)</Label>
+        <Label for="Abstract">Abstract (optional)</Label>
         <Input
           className="input"
           value={this.state.abstract}
@@ -65,11 +77,16 @@ class ArticleForm extends Component {
           onChange={this.handleInputChange}
         />
         <Button onClick={() => this.handleAddArticle()} type="button">
-          Add New Article
+          {this.props.updating ? (
+            <Loader type="ThreeDots" color="#1f2a38" height="12" width="26" />
+          ) : (
+              <React.Fragment>{this.props.buttonText}</React.Fragment>
+            )}
+
         </Button>
       </Form>
     );
   }
 }
 
-export default withRouter( ArticleForm)
+export default withRouter(ArticleForm)

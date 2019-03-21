@@ -26,30 +26,15 @@ class Tabs extends React.Component {
                 Authentication: token
             },
         };
-        axios.get('https://pintereacher.herokuapp.com/api/articles/')
-            .then((res) => {
-                // console.log(res)
-                this.setState({ articles: res.data })
-                return res.data
-            })
-
-            .then(articles => ({ articles }))
-
-            .catch(err => ({ error: err }))
 
         setGlobal(
             axios.get('https://pintereacher.herokuapp.com/api/articles/', options)
                 .then((res) => {
-                    // console.log(res)
                     return res.data
                 })
-
                 .then(articles => ({ articles }))
-
                 .catch(err => ({ error: err }))
-
         );
-        // console.log(this.global.articles);
     }
 
     toggle(tab) {
@@ -77,8 +62,6 @@ class Tabs extends React.Component {
 
 
     render() {
-        // console.log(this.state.articles);
-        // console.log(this.global.articles);
         return (
             <div>
                 <Nav tabs>
@@ -111,22 +94,28 @@ class Tabs extends React.Component {
 
                     {this.global.articles.map((article) => (
                         <div className='article-card'>
-                        <a href={article.content}>
+                        
                         <Card
                             key={article.id}
-                            // title={article.title}
-                            // content={article.content}
-                            // abstract={article.abstract}
-                            // category={article.category}
+                            title={article.title}
+                            content={article.content}
+                            abstract={article.abstract}
+                            category={article.category}
                         >
-                            <CardTitle>{article.title}</CardTitle>
-                            <CardText>{article.abstract}</CardText>
-                        </Card></a>
-                            <Button href='/edit-article'>Edit</Button>
+                            <a href={article.content}>
+                                <CardTitle>{article.title}</CardTitle>
+                                <CardText>{article.abstract}</CardText>
+                            </a>
+                            <Button onClick={()=>{
+                                this.props.history.push(`${article.id}/edit-article`)
+                            }}
+                            > Edit </Button>
                             <Button onClick={e=>{
                                 e.preventDefault()
                                 deleteArticle(article.id)
                             }}>Delete</Button>
+                        </Card>
+                            
                         </div>
                     ))}
 

@@ -25,6 +25,7 @@ export const deleteArticle = id => {
 
 export const editArticle = article => {
     const id = article.id
+    console.log(article)
     axios.put(`${URL}/articles/${id}`, article).then(status => {
         // console.log(status)
         return status
