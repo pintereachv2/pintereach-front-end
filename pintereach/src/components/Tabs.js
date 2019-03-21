@@ -4,6 +4,7 @@ import classnames from 'classnames';
 import { withRouter } from 'react-router';
 import axios from 'axios';
 
+import { deleteArticle, editArticle } from '../actions'
 import Cards from './Cards';
 let URL = 'https://pintereacher.herokuapp.com/'
 class Tabs extends React.Component {
@@ -107,9 +108,10 @@ class Tabs extends React.Component {
                 </Nav>
                 <TabContent>
                     {this.global.articles.map((article, i) => (
+                        <div>
                         <a href={article.content}>
                         <Card
-                            key={i}
+                            key={article.id}
                             title={article.title}
                             content={article.content}
                             abstract={article.abstract}
@@ -118,10 +120,14 @@ class Tabs extends React.Component {
                             <CardTitle>{article.title}</CardTitle>
                             {/* <CardSubtitle>article.category</CardSubtitle> */}
                             <CardText>{article.abstract}</CardText>
-                            <Button>Button</Button>
                         </Card></a>
+                            <Button href='/edit-article'>Edit</Button>
+                            <Button onClick={e=>{
+                                e.preventDefault()
+                                deleteArticle(article.id)
+                            }}>Delete</Button>
+                        </div>
                     ))}
-
                 </TabContent>
             </div>
         );

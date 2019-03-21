@@ -55,10 +55,12 @@ class Login extends React.Component {
     console.log(this.state.credentials);
   };
 
+
+
   render() {
     return (
       <div>
-        <Navigation />
+        <Navigation isLoggingIonSignIn />
         <div className='App-header'>
           <h1>Pintereach</h1>
           <p>Easily organize research articles from the web</p>

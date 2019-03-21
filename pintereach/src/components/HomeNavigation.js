@@ -13,6 +13,7 @@ import {
   DropdownItem } from 'reactstrap';
 import Home from './Home';
 import { withRouter } from 'react-router';
+import { Link } from 'react-router-dom'
 import axios from 'axios';
 
 export default class HomeNavigation extends React.Component {
@@ -47,7 +48,9 @@ export default class HomeNavigation extends React.Component {
                 </DropdownToggle>
                 <DropdownMenu right>
                   <DropdownItem>
+                  <Link to="/add">
                     Add New Article
+                  </Link>
                   </DropdownItem>
                   <DropdownItem>
                     Edit Article

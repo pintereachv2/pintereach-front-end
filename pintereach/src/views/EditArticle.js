@@ -4,7 +4,7 @@ import classnames from 'classnames';
 import { withRouter } from 'react-router';
 import ArticleForm from '../components/ArticleForm'
 import axios from 'axios';
-
+import HomeNavigation from '../components/HomeNavigation';
 import {editArticle} from '../actions/index';
 
 class EditArticle extends React.Component {
@@ -16,6 +16,9 @@ class EditArticle extends React.Component {
         };
     }
     editArticles = (article) => {
+        console.log(article)
+        // add article id to article object before passing it to editArticle
+        
         editArticle(article)
     }
     render() {

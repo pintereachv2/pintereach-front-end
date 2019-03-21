@@ -23,7 +23,7 @@ class App extends Component {
           <Route path="/" exact component={Register}/>
           <Route path="/login" component={Login} />
           <PrivateRoute path="/home" component={Home} />
-          <PrivateRoute path="/:id/add" component={AddArticleView} />
+          <PrivateRoute path="/add" component={AddArticleView} />
           <PrivateRoute path="/:id/edit-article" component={EditArticleView} />
         </div>
       </Router>

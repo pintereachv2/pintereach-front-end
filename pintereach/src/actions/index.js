@@ -1,4 +1,5 @@
 import axios from "axios";
+import { getGlobal, setGlobal } from 'reactn'
 // import { env } from '../environment';
 
 // export const LOGIN_START = "LOGIN_START";
@@ -60,25 +61,22 @@ export const createArticle = article => {
   });
 };
 
-// export const deleteArticle = id => {
-//   const deletedArticle = axios.delete(`${URL}/delete`, {
-//     data: { id }
-//   });
-//   return dispatch => {
-//     dispatch({ type: DELETING_ARTICLES });
-//     deletedArticle
-//       .then(({ data }) => {
-//         dispatch({ type: DELETE_ARTICLES, payload: data });
-//         dispatch({ type: SINGLE_ARTICLE, payload: {} });
-//       })
-//       .catch(err => {
-//         dispatch({ type: ERROR, payload: err });
-//       });
-//   };
-// };
+export const deleteArticle = id => {
+  const deletedArticle = axios.delete(`${URL}/articles/${id}`).then(status => {
+      const oldArticles = getGlobal().articles
+      const newArticles = oldArticles.filter(article => article.id !== id)
+    
+    console.log(status)
+    setGlobal({
+        articles: newArticles
+    })
+    return status
+  })
+};
 
 export const editArticle = article => {
-    const editArticle = axios.put(`${URL}/create`, article).then(status => {
+    const id = article.id
+    const editArticle = axios.put(`${URL}/articles/${id}`, article).then(status => {
         console.log(status)
         return status
     });

@@ -5,7 +5,8 @@ import { withRouter } from 'react-router';
 import ArticleForm from '../components/ArticleForm'
 import { createArticle } from '../actions'
 import axios from 'axios';
-
+import HomeNavigation from '../components/HomeNavigation';
+import Home from '../components/Home';
 class AddArticleView extends React.Component {
         constructor(props) {
         super(props);
@@ -18,8 +19,14 @@ class AddArticleView extends React.Component {
             console.log(article)
             createArticle(article)
         }
+
     render() {
-        return(<ArticleForm doOnSubmit={this.addArticles}></ArticleForm>)
+        return(
+            <div>
+            <HomeNavigation/>
+                <ArticleForm doOnSubmit={this.addArticles}></ArticleForm>
+            </div>
+        )
         
     }
 }
