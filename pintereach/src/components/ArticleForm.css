@@ -1,0 +1,15 @@
+.form-button {
+    margin: 10px;
+}
+.form-container {
+    display: flex;
+    justify-content: center;
+    max-width: 600px;
+}
+/* @media (min-width: 800px) {
+    .form-container {
+        display: flex;
+        justify-content: center;
+        width: 600px;
+    }
+} */
