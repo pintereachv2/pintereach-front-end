@@ -3,7 +3,6 @@ import {
   Collapse,
   Navbar,
   NavbarToggler,
-  NavbarBrand,
   Nav,
   NavItem,
   NavLink,
@@ -11,6 +10,7 @@ import {
   DropdownToggle,
   DropdownMenu,
   DropdownItem } from 'reactstrap';
+  import '../App';
 
 export default class Navigation extends React.Component {
   constructor(props) {
@@ -31,7 +31,7 @@ export default class Navigation extends React.Component {
     return (
       <div>
         <Navbar color="light" light expand="md">
-          <NavbarBrand href="/">Pintereach</NavbarBrand>
+        <img src={require("../images/logo_transparent.png")} alt="logo" className="img-responsive" />
           <NavbarToggler onClick={this.toggle} />
           <Collapse isOpen={this.state.isOpen} navbar>
             <Nav className="ml-auto" navbar>

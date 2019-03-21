@@ -5,7 +5,6 @@ import { withRouter } from 'react-router';
 import axios from 'axios';
 
 import { deleteArticle, editArticle } from '../actions'
-import Cards from './Cards';
 let URL = 'https://pintereacher.herokuapp.com/'
 class Tabs extends React.Component {
     constructor(props) {
@@ -44,6 +43,7 @@ class Tabs extends React.Component {
                 })
 
                 .then(articles => ({ articles }))
+
                 .catch(err => ({ error: err }))
 
         );
@@ -107,13 +107,28 @@ class Tabs extends React.Component {
                 </Nav>
                 <TabContent>
 
-                    {/* { this.global.articles.map((article, i) => (
-                        <Cards 
-                        key={article.title} 
-                        {...article}
-                        />
-                    )) } */}
-                    
+                    {this.global.articles.map((article, i) => (
+                        <div>
+                        <a href={article.content}>
+                        <Card
+                            key={article.id}
+                            title={article.title}
+                            content={article.content}
+                            abstract={article.abstract}
+                            category={article.category}
+                        >
+                            <CardTitle>{article.title}</CardTitle>
+                            {/* <CardSubtitle>article.category</CardSubtitle> */}
+                            <CardText>{article.abstract}</CardText>
+                        </Card></a>
+                            <Button href='/edit-article'>Edit</Button>
+                            <Button onClick={e=>{
+                                e.preventDefault()
+                                deleteArticle(article.id)
+                            }}>Delete</Button>
+                        </div>
+                    ))}
+
                 </TabContent>
             </div>
         );
