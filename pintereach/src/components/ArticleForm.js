@@ -4,11 +4,12 @@ import { createArticle } from '../actions';
 import { withRouter } from 'react-router';
 
 class ArticleForm extends Component {
+  // todo update state if article prop is passed down
   state = {
     title: '',
     content: '',
     abstract: '',
-    subject: ''
+    category: ''
   };
 
   handleInputChange = event => {
@@ -54,13 +55,13 @@ class ArticleForm extends Component {
           placeholder="Abstract"
           onChange={this.handleInputChange}
         />
-        <Label for="Subject">Subject</Label>
+        <Label for="category">Category</Label>
         <Input
           className="input"
-          value={this.state.subject}
-          name="subject"
+          value={this.state.category}
+          name="category"
           type="text"
-          placeholder="Subject"
+          placeholder="Category"
           onChange={this.handleInputChange}
         />
         <Button onClick={() => this.handleAddArticle()} type="button">
