@@ -32,6 +32,6 @@
   }
 }
 
-.img-responsive {
-  margin: -90px auto;
+.tab-nav-item:hover {
+  cursor: pointer;
 }

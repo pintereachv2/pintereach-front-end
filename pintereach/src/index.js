@@ -23,7 +23,9 @@ setGlobal({
     updatingArticles: false,
     creatingArticles: false,
     deletingArticles: false,
-    articles: []
+    articles: [],
+    tabCategorys: ['all'],
+    activeTab: 'all'
 })
 
 const rootElement = document.getElementById('root');

@@ -38,6 +38,9 @@ export default class HomeNavigation extends React.Component {
           <Collapse isOpen={this.state.isOpen} navbar>
             <Nav className="ml-auto" navbar>
               <NavItem>
+                <NavLink href="/home" >Articles</NavLink>
+              </NavItem>
+              <NavItem>
                 <NavLink href="/login" >Log Out</NavLink>
               </NavItem>
               <UncontrolledDropdown nav inNavbar>
