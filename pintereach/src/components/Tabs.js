@@ -107,6 +107,7 @@ class Tabs extends React.Component {
                     </NavItem>
                 </Nav>
                 <TabContent>
+
                     {this.global.articles.map((article, i) => (
                         <div>
                         <a href={article.content}>
@@ -128,6 +129,7 @@ class Tabs extends React.Component {
                             }}>Delete</Button>
                         </div>
                     ))}
+
                 </TabContent>
             </div>
         );
