@@ -6,7 +6,12 @@ import Login from './components/Login';
 import Home from './components/Home';
 import PrivateRoute from './components/PrivateRoute';
 import Register from './components/Register';
-import NewArticle from './components/NewArticle';
+import {
+  AddArticleView,
+  EditArticleView
+} from './views'
+// import AddArticleForm from './views/AddArticleForm';
+// import EditArticle from './views/EditArticle';
 
 
 
@@ -18,7 +23,8 @@ class App extends Component {
           <Route path="/" exact component={Register}/>
           <Route path="/login" component={Login} />
           <PrivateRoute path="/home" component={Home} />
-          <PrivateRoute path="/new-article" component={NewArticle} />
+          <PrivateRoute path="/add" component={AddArticleView} />
+          <PrivateRoute path="/:id/edit-article" component={EditArticleView} />
         </div>
       </Router>
     );

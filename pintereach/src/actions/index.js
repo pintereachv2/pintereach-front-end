@@ -1,4 +1,5 @@
-// import axios from "axios";
+import axios from "axios";
+import { getGlobal, setGlobal } from 'reactn'
 // import { env } from '../environment';
 
 // export const LOGIN_START = "LOGIN_START";
@@ -36,58 +37,50 @@
 //     });
 //   };
 
-//   const URL = 'http://localhost:5000/api/friends';
 
 // export const getArticle = () => {
-//   const articles = axios.get(`${URL}/get`);
-//   return dispatch => {
+    //   const articles = axios.get(`${URL}/get`);
+    //   return dispatch => {
 //     dispatch({ type: GETTING_ARTICLES });
 //     articles
 //       .then(response => {
-//         dispatch({ type: GET_ARTICLES, payload: response.data });
+    //         dispatch({ type: GET_ARTICLES, payload: response.data });
 //       })
 //       .catch(err => {
-//         dispatch({ type: ERROR, payload: err });
-//       });
+    //         dispatch({ type: ERROR, payload: err });
+    //       });
 //   };
 // };
+const URL = 'https://pintereacher.herokuapp.com/api';
 
-// export const createArticle = article => {
-//   const newArticle = axios.post(`${URL}/create`, article);
-//   return dispatch => {
-//     dispatch({ type: CREATING_ARTICLES });
-//     newArticle
-//       .then(({ data }) => {
-//         dispatch({ type: CREATE_ARTICLES, payload: data });
-//       })
-//       .catch(err => {
-//         dispatch({ type: ERROR, payload: err });
-//       });
-//   };
-// };
+export const createArticle = article => {
+    console.log(article)
+  const newArticle = axios.post(`${URL}/articles`, article).then(status => {
+      console.log(status)
+      return status
+  });
+};
 
-// export const deleteArticle = id => {
-//   const deletedArticle = axios.delete(`${URL}/delete`, {
-//     data: { id }
-//   });
-//   return dispatch => {
-//     dispatch({ type: DELETING_ARTICLES });
-//     deletedArticle
-//       .then(({ data }) => {
-//         dispatch({ type: DELETE_ARTICLES, payload: data });
-//         dispatch({ type: SINGLE_ARTICLE, payload: {} });
-//       })
-//       .catch(err => {
-//         dispatch({ type: ERROR, payload: err });
-//       });
-//   };
-// };
+export const deleteArticle = id => {
+  const deletedArticle = axios.delete(`${URL}/articles/${id}`).then(status => {
+      const oldArticles = getGlobal().articles
+      const newArticles = oldArticles.filter(article => article.id !== id)
+    
+    console.log(status)
+    setGlobal({
+        articles: newArticles
+    })
+    return status
+  })
+};
 
-// export const toggleShowUpdate = () => {
-//   return {
-//     type: TOGGLE_UPDATE_ARTICLE
-//   };
-// };
+export const editArticle = article => {
+    const id = article.id
+    const editArticle = axios.put(`${URL}/articles/${id}`, article).then(status => {
+        console.log(status)
+        return status
+    });
+};
 
 // export const updateSingleArticle = article => {
 //   return {

@@ -44,7 +44,7 @@ class Register extends Component {
     return (
 
       <div className="App">
-        <Navigation />
+        <Navigation onSignIn={false} />
         <header className="App-header">
           <h1>Pintereach</h1>
           <p>Easily organize research articles from the web</p>
