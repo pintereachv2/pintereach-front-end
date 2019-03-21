@@ -106,7 +106,7 @@ class Tabs extends React.Component {
                     </NavItem>
                 </Nav>
                 <TabContent>
-<<<<<<< HEAD
+
                     {/* { this.global.articles.map((article, i) => (
                         <Cards 
                         key={article.title} 
@@ -114,31 +114,6 @@ class Tabs extends React.Component {
                         />
                     )) } */}
                     
-=======
-
-                    {this.global.articles.map((article, i) => (
-                        <div>
-                        <a href={article.content}>
-                        <Card
-                            key={article.id}
-                            title={article.title}
-                            content={article.content}
-                            abstract={article.abstract}
-                            category={article.category}
-                        >
-                            <CardTitle>{article.title}</CardTitle>
-                            {/* <CardSubtitle>article.category</CardSubtitle> */}
-                            <CardText>{article.abstract}</CardText>
-                        </Card></a>
-                            <Button href='/edit-article'>Edit</Button>
-                            <Button onClick={e=>{
-                                e.preventDefault()
-                                deleteArticle(article.id)
-                            }}>Delete</Button>
-                        </div>
-                    ))}
-
->>>>>>> 1d26d05d396158e957aea3ea28d2f3d92edc7c8b
                 </TabContent>
             </div>
         );

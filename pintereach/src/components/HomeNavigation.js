@@ -46,12 +46,8 @@ export default class HomeNavigation extends React.Component {
                   Article Options
                 </DropdownToggle>
                 <DropdownMenu right>
-<<<<<<< HEAD
-                  <DropdownItem href="/new-article">
-=======
                   <DropdownItem>
                   <Link to="/add">
->>>>>>> 1d26d05d396158e957aea3ea28d2f3d92edc7c8b
                     Add New Article
                   </Link>
                   </DropdownItem>
