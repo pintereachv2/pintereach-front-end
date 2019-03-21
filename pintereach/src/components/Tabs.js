@@ -1,120 +1,143 @@
 import React, { setGlobal } from 'reactn';
-import { TabContent, TabPane, Nav, NavItem, NavLink, Card, Button, CardTitle, CardText, Row, Col } from 'reactstrap';
+import { TabContent, Nav, NavItem, NavLink, Button, Card, CardTitle, CardText, CardSubtitle } from 'reactstrap';
 import classnames from 'classnames';
 import { withRouter } from 'react-router';
 import axios from 'axios';
+import '../App.css';
 
-import Cards from './Cards';
-let URL = 'https://pintereacher.herokuapp.com/'
+import { getArticles, deleteArticle, editArticle } from '../actions'
+
+// let URL = 'https://pintereacher.herokuapp.com/'
+
 class Tabs extends React.Component {
     constructor(props) {
-    super(props);
+        super(props);
+        this.toggle = this.toggle.bind(this);
+        this.state = {
+            selectedTab: 'all',
+            activeTab: 'all',
+            tabCategorys: ['all', 'science', 'biz']
 
-    this.toggle = this.toggle.bind(this);
-    this.state = {
-        selectedTab: 'all',
-        activeTab: '1'
         };
+        getArticles()
     }
 
     componentDidMount() {
-        const token = window.localStorage.getItem('jwt')
-        const options = {
-            headers: {
-              Authentication: token
-            },
-        };
-            axios.get('https://pintereacher.herokuapp.com/api/articles/')
-                .then((res) => {
-                    console.log(res)
-                    this.setState({articles: res.data})
-                  return res.data
-                })
+        // const token = window.localStorage.getItem('jwt')
+        // const options = {
+        //     headers: {
+        //         Authentication: token
+        //     },
+        // };
+        // setGlobal(
+        //     axios.get('https://pintereacher.herokuapp.com/api/articles/', options)
+        //         .then((res) => {
+        //             return res.data
+        //         })
+        //         .then(articles => ({ articles }))
+        //         .catch(err => ({ error: err }))
+        // );
+        // set unqie article categorys
+        setInterval(this.getArticleCategorys, 1000)
+        
+        this.getArticleCategorys()
 
-                .then(articles => ({ articles }))
-
-                .catch(err => ({ error: err }))
- 
-        setGlobal(
-            axios.get('https://pintereacher.herokuapp.com/api/articles/', options)
-                .then((res) => {
-                    console.log(res)
-                  return res.data
-                })
-
-                .then(articles => ({ articles }))
-
-                .catch(err => ({ error: err }))
-                
-        );
-        console.log(this.global.articles);
     }
 
     toggle(tab) {
-    if (this.state.activeTab !== tab) {
-        this.setState({
-        activeTab: tab
-        });
-    }
+        if (this.state.activeTab !== tab) {
+            this.setState({
+                activeTab: tab
+            });
+        }
     }
 
-    // filterCards = () => {
-    //     if(this.state.activeTab === 'all') {
-    //        return this.state.articles      
-    //     } else {
-    //       const newArray = []
-    //       this.state.articles.filter((article) => {
-    //         if(article.category==this.state.selectedTab){
-    //           newArray.push(article);
-    //         } 
-    //       });
-    //       return newArray;
-    //     }
-    //   };
-    
+    filterCards = () => {
+        if(this.state.activeTab === 'all') {
+           return this.global.articles
+        } else {
+          const newArray = []
+          this.global.articles.filter((article) => {
+            if(article.category==this.state.activeTab){
+              newArray.push(article);
+            } 
+          });
+          return newArray;
+        }
+      };
+
+    getArticleCategorys = () => {
+        // get global object
+        // map for categorys 
+        console.log(this.global.articles)
+        const categorys = this.global.articles.map(a => a.category)
+        console.log(categorys)
+        // reduce removing duplicates
+        const uniq = [...new Set(categorys)]; 
+        console.log(uniq)
+        setGlobal({
+            tabCategorys: ['all', ...uniq]
+        })
+        this.setState({
+            tabCategorys: ['all', ...uniq]
+        })
+    }
+    // first 
+    // find unquie article categorys 
+    // make tabs based on those categorys
+    // then when a tab is selected. filter for that category
+    //
+
 
 
     render() {
-        console.log(this.state.articles);
+        console.log(this.props.article);
         return (
-            <div>
+            <div className="tabs">
                 <Nav tabs>
-                    <NavItem>
-                        <NavLink
-                        className={classnames({ active: this.state.activeTab === '1' })}
-                        onClick={() => { this.toggle('1'); }}
-                        >
-                        All
-                        </NavLink>
-                    </NavItem>
-                    <NavItem>
-                        <NavLink
-                        className={classnames({ active: this.state.activeTab === '2' })}
-                        onClick={() => { this.toggle('2'); }}
-                        >
-                        Tech
-                        </NavLink>
-                    </NavItem>
-                    <NavItem>
-                        <NavLink
-                        className={classnames({ active: this.state.activeTab === '3' })}
-                        onClick={() => { this.toggle('3'); }}
-                        >
-                        Business
-                        </NavLink>
-                    </NavItem>
+                {this.state.tabCategorys.map((category, i) => {
+                        return (
+                            <NavItem className="tab-nav-item">
+                                <NavLink
+                                    className={classnames(this.state.activeTab === String(category) ? 'active': '', category)}
+                                    onClick={() => { this.toggle(String(category)); }}
+                                >
+                                    {category}
+                                </NavLink>
+                            </NavItem>
+                        )
+                    })}
                 </Nav>
                 <TabContent>
-                    {/* { this.global.articles.map((article, i) => (
-                        <Cards 
-                        key={i} 
-                        title={article.title}
-                        content={article.content}
-                        abstract={article.abstract}
-                        category={article.category}
-                        />
-                    )) } */}
-                    
+
+                    {this.filterCards().map((article) => (
+                        <div className='article-card'>
+                        
+                        <Card
+                            key={article.id}
+                            title={article.title}
+                            content={article.content}
+                            abstract={article.abstract}
+                            category={article.category}
+                        >
+                            <CardTitle>{article.title}</CardTitle>
+                            <a href={article.content}>
+                                <CardSubtitle>{article.content}</CardSubtitle>
+                            </a>
+                            <CardText>{article.abstract}</CardText>
+                            <Button onClick={()=>{
+                                this.props.history.push(`${article.id}/edit-article`)
+                            }}
+                            > Edit </Button>
+                            <Button onClick={e=>{
+                                e.preventDefault()
+                                deleteArticle(article.id)
+                            }}>Delete</Button>
+                        </Card>
+                            
+                        </div>
+                    ))}
+
                 </TabContent>
             </div>
         );

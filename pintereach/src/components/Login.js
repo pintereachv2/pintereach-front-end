@@ -7,7 +7,7 @@ import { withRouter } from 'react-router';
 import Navigation from './Navigation';
 
 import '../App.css';
-const URL = 'localhost:4000' //env[process.env.environment].url
+// const URL = 'localhost:4000' //env[process.env.environment].url
 class Login extends React.Component {
   state = {
     credentials: {
@@ -27,30 +27,34 @@ class Login extends React.Component {
 
   login = e => {
     e.preventDefault();
-    const URL = 'http://localhost:4000' //env[process.env.environment].url
-    const creds = this.state.credentials
-    // setGlobal(axios.post(`${URL}/api/login`, creds)
-    //   .then(res => {
-    //     setGlobal({isLoggingIn: true})
-    //     localStorage.setItem("jwt", res.data.token);
-    //   }));
-
     // const URL = 'http://localhost:4000' //env[process.env.environment].url
+    const creds = this.state.credentials
+    
     axios.post(`https://pintereacher.herokuapp.com/api/login`, creds)
       .then(res => {
         setGlobal({isLoggingIn:true})
         const AUTH_TOKEN = res.data.token
+        const userId = res.data.id
+
         axios.defaults.headers.common['Authorization'] = AUTH_TOKEN;
+
         localStorage.setItem("jwt", AUTH_TOKEN);
+
+        setGlobal({
+          userId
+        })
+        // console.log(this.global)
         this.props.history.push('/home')
       }).catch(err => console.log(err));
-    console.log(this.state.credentials);
+    // console.log(this.state.credentials);
   };
+
+
 
   render() {
     return (
       <div>
-        <Navigation />
+        <Navigation isLoggingIonSignIn />
         <div className='App-header'>
           <h1>Pintereach</h1>
           <p>Easily organize research articles from the web</p>

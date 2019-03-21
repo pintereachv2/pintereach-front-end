@@ -1,7 +1,4 @@
-import React, { setGlobal } from 'reactn';
-import axios from 'axios'
-import Loader from 'react-loader-spinner';
-import { TabContent, TabPane, Nav, NavItem, NavLink, Card, Button, CardTitle, CardText, Row, Col } from 'reactstrap';
+import React from 'reactn';
 import { withRouter } from 'react-router';
 
 

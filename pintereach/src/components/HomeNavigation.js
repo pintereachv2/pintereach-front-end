@@ -1,9 +1,8 @@
-import React, { setGlobal } from 'reactn';
+import React from 'reactn';
 import {
   Collapse,
   Navbar,
   NavbarToggler,
-  NavbarBrand,
   Nav,
   NavItem,
   NavLink,
@@ -11,9 +10,9 @@ import {
   DropdownToggle,
   DropdownMenu,
   DropdownItem } from 'reactstrap';
-import Home from './Home';
 import { withRouter } from 'react-router';
-import axios from 'axios';
+import { Link } from 'react-router-dom'
+import '../App';
 
 export default class HomeNavigation extends React.Component {
   constructor(props) {
@@ -34,10 +33,13 @@ export default class HomeNavigation extends React.Component {
     return (
       <div>
         <Navbar color="light" light expand="md">
-          <NavbarBrand href="/">Pintereach</NavbarBrand>
+        <img src={require("../images/logo_transparent.png")} alt="logo" className="img-responsive" />
           <NavbarToggler onClick={this.toggle} />
           <Collapse isOpen={this.state.isOpen} navbar>
             <Nav className="ml-auto" navbar>
+              <NavItem>
+                <NavLink href="/home" >Articles</NavLink>
+              </NavItem>
               <NavItem>
                 <NavLink href="/login" >Log Out</NavLink>
               </NavItem>
@@ -47,14 +49,9 @@ export default class HomeNavigation extends React.Component {
                 </DropdownToggle>
                 <DropdownMenu right>
                   <DropdownItem>
+                  <Link to="/add">
                     Add New Article
-                  </DropdownItem>
-                  <DropdownItem>
-                    Edit Article
-                  </DropdownItem>
-                  <DropdownItem />
-                  <DropdownItem>
-                    Delete Article
+                  </Link>
                   </DropdownItem>
                 </DropdownMenu>
               </UncontrolledDropdown>
@@ -67,4 +64,3 @@ export default class HomeNavigation extends React.Component {
 }
 
 HomeNavigation = withRouter(HomeNavigation);
-// export default HomeNavigation;
