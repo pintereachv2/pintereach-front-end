@@ -1,4 +1,4 @@
-import React, { setGlobal } from 'reactn';
+import React from 'reactn';
 import {
   Collapse,
   Navbar,
@@ -49,13 +49,6 @@ export default class HomeNavigation extends React.Component {
                   <Link to="/add">
                     Add New Article
                   </Link>
-                  </DropdownItem>
-                  <DropdownItem>
-                    Edit Article
-                  </DropdownItem>
-                  <DropdownItem />
-                  <DropdownItem>
-                    Delete Article
                   </DropdownItem>
                 </DropdownMenu>
               </UncontrolledDropdown>

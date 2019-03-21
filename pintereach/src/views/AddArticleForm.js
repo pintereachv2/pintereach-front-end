@@ -1,12 +1,10 @@
-import React, { setGlobal } from 'reactn';
-import { TabContent, TabPane, Nav, NavItem, NavLink, Button, Card, CardTitle, CardText, Row, Col } from 'reactstrap';
-import classnames from 'classnames';
+import React from 'reactn';
 import { withRouter } from 'react-router';
 import ArticleForm from '../components/ArticleForm'
 import { createArticle } from '../actions'
-import axios from 'axios';
+
 import HomeNavigation from '../components/HomeNavigation';
-import Home from '../components/Home';
+
 class AddArticleView extends React.Component {
         constructor(props) {
         super(props);

@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import { Button, Form, FormGroup, Label, Input } from 'reactstrap';
-import { createArticle } from '../actions';
+import { Button, Form, Label, Input } from 'reactstrap';
+// import { createArticle } from '../actions';
 import { withRouter } from 'react-router';
 
 class ArticleForm extends Component {

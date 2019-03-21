@@ -1,11 +1,13 @@
 import React, { setGlobal } from 'reactn';
-import { TabContent, TabPane, Nav, NavItem, NavLink, Button, Card, CardTitle, CardText, Row, Col } from 'reactstrap';
+import { TabContent, Nav, NavItem, NavLink, Button, Card, CardTitle, CardText } from 'reactstrap';
 import classnames from 'classnames';
 import { withRouter } from 'react-router';
 import axios from 'axios';
 
 import { deleteArticle, editArticle } from '../actions'
-let URL = 'https://pintereacher.herokuapp.com/'
+
+// let URL = 'https://pintereacher.herokuapp.com/'
+
 class Tabs extends React.Component {
     constructor(props) {
         super(props);
@@ -26,7 +28,7 @@ class Tabs extends React.Component {
         };
         axios.get('https://pintereacher.herokuapp.com/api/articles/')
             .then((res) => {
-                console.log(res)
+                // console.log(res)
                 this.setState({ articles: res.data })
                 return res.data
             })
@@ -38,7 +40,7 @@ class Tabs extends React.Component {
         setGlobal(
             axios.get('https://pintereacher.herokuapp.com/api/articles/', options)
                 .then((res) => {
-                    console.log(res)
+                    // console.log(res)
                     return res.data
                 })
 
@@ -47,7 +49,7 @@ class Tabs extends React.Component {
                 .catch(err => ({ error: err }))
 
         );
-        console.log(this.global.articles);
+        // console.log(this.global.articles);
     }
 
     toggle(tab) {
@@ -75,8 +77,8 @@ class Tabs extends React.Component {
 
 
     render() {
-        console.log(this.state.articles);
-        console.log(this.global.articles);
+        // console.log(this.state.articles);
+        // console.log(this.global.articles);
         return (
             <div>
                 <Nav tabs>
@@ -107,18 +109,17 @@ class Tabs extends React.Component {
                 </Nav>
                 <TabContent>
 
-                    {this.global.articles.map((article, i) => (
-                        <div>
+                    {this.global.articles.map((article) => (
+                        <div className='article-card'>
                         <a href={article.content}>
                         <Card
                             key={article.id}
-                            title={article.title}
-                            content={article.content}
-                            abstract={article.abstract}
-                            category={article.category}
+                            // title={article.title}
+                            // content={article.content}
+                            // abstract={article.abstract}
+                            // category={article.category}
                         >
                             <CardTitle>{article.title}</CardTitle>
-                            {/* <CardSubtitle>article.category</CardSubtitle> */}
                             <CardText>{article.abstract}</CardText>
                         </Card></a>
                             <Button href='/edit-article'>Edit</Button>

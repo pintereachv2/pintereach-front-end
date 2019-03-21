@@ -4,19 +4,18 @@ import { getGlobal, setGlobal } from 'reactn'
 const URL = 'https://pintereacher.herokuapp.com/api';
 
 export const createArticle = article => {
-    console.log(article)
-  const newArticle = axios.post(`${URL}/articles`, article).then(status => {
-      console.log(status)
+    // console.log(article)
+  axios.post(`${URL}/articles`, article).then(status => {
+      // console.log(status)
       return status
   });
 };
 
 export const deleteArticle = id => {
-  const deletedArticle = axios.delete(`${URL}/articles/${id}`).then(status => {
+  axios.delete(`${URL}/articles/${id}`).then(status => {
       const oldArticles = getGlobal().articles
       const newArticles = oldArticles.filter(article => article.id !== id)
-    
-    console.log(status)
+    // console.log(status)
     setGlobal({
         articles: newArticles
     })
@@ -26,8 +25,8 @@ export const deleteArticle = id => {
 
 export const editArticle = article => {
     const id = article.id
-    const editArticle = axios.put(`${URL}/articles/${id}`, article).then(status => {
-        console.log(status)
+    axios.put(`${URL}/articles/${id}`, article).then(status => {
+        // console.log(status)
         return status
     });
 };

@@ -1,10 +1,6 @@
-import React, { setGlobal } from 'reactn';
-import { TabContent, TabPane, Nav, NavItem, NavLink, Button, Card, CardTitle, CardText, Row, Col } from 'reactstrap';
-import classnames from 'classnames';
+import React from 'reactn';
 import { withRouter } from 'react-router';
-import ArticleForm from '../components/ArticleForm'
-import axios from 'axios';
-import HomeNavigation from '../components/HomeNavigation';
+
 import {editArticle} from '../actions/index';
 
 class EditArticle extends React.Component {
