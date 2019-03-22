@@ -34,9 +34,17 @@
   }
 }
 
+.nav-item a {
+  margin-top: -8px;
+  font-weight: 800;  
+    color: #212529;
+
+}
+
 .nav-item {
   font-weight: 800;  
 }
+
 .tabs .nav.nav-tabs {
   justify-content: center;  
 }
