@@ -14,7 +14,8 @@ class Tabs extends React.Component {
         this.toggle = this.toggle.bind(this);
         this.state = {
             selectedTab: 'all',
-            activeTab: '1'
+            activeTab: '1',
+            tabCategorys: ['all', 'science', 'biz']
         };
     }
 
@@ -59,20 +60,27 @@ class Tabs extends React.Component {
         }
     }
 
-    // filterCards = () => {
-    //     if(this.state.activeTab === 'all') {
-    //        return this.state.articles      
-    //     } else {
-    //       const newArray = []
-    //       this.state.articles.filter((article) => {
-    //         if(article.category==this.state.selectedTab){
-    //           newArray.push(article);
-    //         } 
-    //       });
-    //       return newArray;
-    //     }
-    //   };
+    filterCards = () => {
+        if(this.state.activeTab === 'all') {
+           return this.global.articles
+        } else {
+          const newArray = []
+          this.state.articles.filter((article) => {
+            if(article.category==this.state.selectedTab){
+              newArray.push(article);
+            } 
+          });
+          return newArray;
+        }
+      };
 
+    getArticleCategorys = () => {
+    }
+    // first 
+    // find unquie article categorys 
+    // make tabs based on those categorys
+    // then when a tab is selected. filter for that category
+    //
 
 
     render() {
@@ -81,15 +89,20 @@ class Tabs extends React.Component {
         return (
             <div>
                 <Nav tabs>
-                    <NavItem>
-                        <NavLink
-                            className={classnames({ active: this.state.activeTab === '1' })}
-                            onClick={() => { this.toggle('1'); }}
-                        >
-                            All
-                        </NavLink>
-                    </NavItem>
-                    <NavItem>
+
+                    {this.state.tabCategorys.map((category, i) => {
+                        return (
+                            <NavItem>
+                                <NavLink
+                                    className={classnames({ active: this.state.activeTab === string(i) }, category)}
+                                    onClick={() => { this.toggle(string(i)); }}
+                                >
+                                    {category}
+                                </NavLink>
+                            </NavItem>
+                        )
+                    })}
+                    {/* <NavItem>
                         <NavLink
                             className={classnames({ active: this.state.activeTab === '2' })}
                             onClick={() => { this.toggle('2'); }}
@@ -97,6 +110,7 @@ class Tabs extends React.Component {
                             Tech
                         </NavLink>
                     </NavItem>
+
                     <NavItem>
                         <NavLink
                             className={classnames({ active: this.state.activeTab === '3' })}
@@ -104,7 +118,8 @@ class Tabs extends React.Component {
                         >
                             Business
                         </NavLink>
-                    </NavItem>
+                    </NavItem> */}
+
                 </Nav>
                 <TabContent>
 
