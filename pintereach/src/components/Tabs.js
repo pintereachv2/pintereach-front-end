@@ -1,58 +1,29 @@
 import React, { setGlobal } from 'reactn';
-import { TabContent, TabPane, Nav, NavItem, NavLink, Button, Card, CardTitle, CardText, Row, Col } from 'reactstrap';
+import { TabContent, Nav, NavItem, NavLink, Button, Card, CardTitle, CardText, CardSubtitle } from 'reactstrap';
 import classnames from 'classnames';
 import { withRouter } from 'react-router';
+import { Link } from 'react-router-dom'
 import axios from 'axios';
+import '../App.css';
 
-import { deleteArticle, editArticle } from '../actions'
-import Cards from './Cards';
-let URL = 'https://pintereacher.herokuapp.com/'
+import { getArticles, deleteArticle, editArticle } from '../actions'
+
+// let URL = 'https://pintereacher.herokuapp.com/'
+
 class Tabs extends React.Component {
     constructor(props) {
         super(props);
-
         this.toggle = this.toggle.bind(this);
         this.state = {
             selectedTab: 'all',
-            activeTab: '1',
+            activeTab: 'all',
             tabCategorys: ['all', 'science', 'biz']
+
         };
+        console.log('getArticle', getArticles())
     }
 
-    componentDidMount() {
-        const token = window.localStorage.getItem('jwt')
-        const options = {
-            headers: {
-                Authentication: token
-            },
-        };
-        axios.get('https://pintereacher.herokuapp.com/api/articles/')
-            .then((res) => {
-                console.log(res)
-                this.setState({ articles: res.data })
-                return res.data
-            })
-
-            .then(articles => ({ articles }))
-
-            .catch(err => ({ error: err }))
-
-        setGlobal(
-            axios.get('https://pintereacher.herokuapp.com/api/articles/', options)
-                .then((res) => {
-                    console.log(res)
-                    return res.data
-                })
-
-                .then(articles => ({ articles }))
-
-                .catch(err => ({ error: err }))
-
-        );
-        console.log(this.global.articles);
-    }
-
-    toggle(tab) {
+     toggle(tab) {
         if (this.state.activeTab !== tab) {
             this.setState({
                 activeTab: tab
@@ -65,14 +36,21 @@ class Tabs extends React.Component {
            return this.global.articles
         } else {
           const newArray = []
-          this.state.articles.filter((article) => {
-            if(article.category==this.state.selectedTab){
+          this.global.articles.filter((article) => {
+            if(article.category==this.state.activeTab){
               newArray.push(article);
             } 
           });
           return newArray;
         }
       };
+
+
+    // first 
+    // find unquie article categorys 
+    // make tabs based on those categorys
+    // then when a tab is selected. filter for that category
+    //
 
     getArticleCategorys = () => {
     }
@@ -84,65 +62,31 @@ class Tabs extends React.Component {
 
 
     render() {
-        console.log(this.state.articles);
-        console.log(this.global.articles);
+        console.log(this.props.article);
         return (
-            <div>
+            <div className="tabs">
                 <Nav tabs>
-
-                    {this.state.tabCategorys.map((category, i) => {
+                {this.global.tabCategorys.map((category, i) => {
                         return (
-                            <NavItem>
+                            <NavItem
+                            key={i}
+                             className="tab-nav-item">
                                 <NavLink
-                                    className={classnames({ active: this.state.activeTab === string(i) }, category)}
-                                    onClick={() => { this.toggle(string(i)); }}
+                                    className={classnames(this.state.activeTab === category ? 'active': '', category)}
+                                    onClick={() => { this.toggle(category); }}
                                 >
                                     {category}
                                 </NavLink>
                             </NavItem>
                         )
                     })}
-                    {/* <NavItem>
-                        <NavLink
-                            className={classnames({ active: this.state.activeTab === '2' })}
-                            onClick={() => { this.toggle('2'); }}
-                        >
-                            Tech
-                        </NavLink>
-                    </NavItem>
-
-                    <NavItem>
-                        <NavLink
-                            className={classnames({ active: this.state.activeTab === '3' })}
-                            onClick={() => { this.toggle('3'); }}
-                        >
-                            Business
-                        </NavLink>
-                    </NavItem> */}
-
                 </Nav>
-                <TabContent>
+                <TabContent className="cards-container">
 
-                    {this.global.articles.map((article, i) => (
-                        <div>
-                        <a href={article.content}>
-                        <Card
-                            key={article.id}
-                            title={article.title}
-                            content={article.content}
-                            abstract={article.abstract}
-                            category={article.category}
-                        >
-                            <CardTitle>{article.title}</CardTitle>
-                            {/* <CardSubtitle>article.category</CardSubtitle> */}
-                            <CardText>{article.abstract}</CardText>
-                        </Card></a>
-                            <Button href='/edit-article'>Edit</Button>
-                            <Button onClick={e=>{
-                                e.preventDefault()
-                                deleteArticle(article.id)
-                            }}>Delete</Button>
-                        </div>
+                    {this.filterCards().map((article) => (
+                        <PinCard 
+                        key={article.id} 
+                        article={article} />
                     ))}
 
                 </TabContent>
@@ -151,6 +95,38 @@ class Tabs extends React.Component {
     }
 }
 
+const PinCard = ({article}) => (
+    <div className='article-card'>
+                        
+    <Card
+        className='card-container'
+        key={article.id}
+        title={article.title}
+        content={article.content}
+        abstract={article.abstract}
+        category={article.category}
+    >
+        <CardTitle className='card-title'>Title: {article.title}</CardTitle>
+            <CardSubtitle>Url: 
+                <a href={article.content} className='card-web-link'>
+                {article.content}
+                </a>
+            </CardSubtitle>
+        <CardText>Abstract: {article.abstract}</CardText>
+        <div className="card-button-container">
+            <Link to={`${article.id}/edit-article`}>
+                <Button className='edit card-button'> Edit </Button>
+            </Link>
+            <Button className='delete card-button'
+                onClick={e=>{
+                e.preventDefault()
+                deleteArticle(article.id)
+            }}>Delete</Button>
+        </div>
+    </Card>
+        
+    </div>
+)
 
 Tabs = withRouter(Tabs);
 export default Tabs;

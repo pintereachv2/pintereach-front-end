@@ -3,7 +3,6 @@ import {
   Collapse,
   Navbar,
   NavbarToggler,
-  NavbarBrand,
   Nav,
   NavItem,
   NavLink,
@@ -11,7 +10,8 @@ import {
   DropdownToggle,
   DropdownMenu,
   DropdownItem } from 'reactstrap';
-
+  import '../App';
+import { Link } from 'react-router-dom'
 export default class Navigation extends React.Component {
   constructor(props) {
     super(props);
@@ -31,15 +31,15 @@ export default class Navigation extends React.Component {
     return (
       <div>
         <Navbar color="light" light expand="md">
-          <NavbarBrand href="/">Pintereach</NavbarBrand>
+        <img src={require("../images/logo_transparent.png")} alt="logo" className="img-responsive" />
           <NavbarToggler onClick={this.toggle} />
           <Collapse isOpen={this.state.isOpen} navbar>
             <Nav className="ml-auto" navbar>
               <NavItem>
                 {!this.props.isLoggingIonSignIn ? (
-                <NavLink href="/login">Sign In</NavLink>
+                <Link to="/login">Sign In</Link>
                 ) : (
-                <NavLink href="/">Sign Up</NavLink>
+                <Link to="/">Sign Up</Link>
                 )}
               </NavItem>
               <UncontrolledDropdown nav inNavbar>
@@ -48,14 +48,10 @@ export default class Navigation extends React.Component {
                 </DropdownToggle>
                 <DropdownMenu right>
                   <DropdownItem>
-                    About
+                    About Team
                   </DropdownItem>
                   <DropdownItem>
-                    Contact
-                  </DropdownItem>
-                  <DropdownItem divider />
-                  <DropdownItem>
-                    Logout
+                    Contact Us
                   </DropdownItem>
                 </DropdownMenu>
               </UncontrolledDropdown>
