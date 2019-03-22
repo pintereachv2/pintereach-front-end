@@ -6,10 +6,8 @@ import {
   Nav,
   NavItem,
   NavLink,
-  UncontrolledDropdown,
-  DropdownToggle,
-  DropdownMenu,
-  DropdownItem } from 'reactstrap';
+  UncontrolledDropdown
+} from 'reactstrap';
 import { withRouter } from 'react-router';
 import { Link } from 'react-router-dom'
 import '../App';
@@ -41,7 +39,7 @@ export default class HomeNavigation extends React.Component {
                 <NavLink className='nav-text' href="/home" >Articles</NavLink>
               </NavItem>
               <NavItem className='nav-text'>
-              <NavLink className='nav-text' href="/add" >Add New Article</NavLink>
+              <Link className='nav-text' to="/add" >Add New Article</Link>
               </NavItem>
               <NavItem >
                 <NavLink className='nav-text' href="/login" >Log Out</NavLink>

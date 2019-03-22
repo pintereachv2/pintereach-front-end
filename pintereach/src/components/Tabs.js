@@ -61,7 +61,9 @@ class Tabs extends React.Component {
                 <Nav tabs>
                 {this.global.tabCategorys.map((category, i) => {
                         return (
-                            <NavItem className="tab-nav-item">
+                            <NavItem
+                            key={i}
+                             className="tab-nav-item">
                                 <NavLink
                                     className={classnames(this.state.activeTab === category ? 'active': '', category)}
                                     onClick={() => { this.toggle(category); }}
@@ -75,7 +77,9 @@ class Tabs extends React.Component {
                 <TabContent className="cards-container">
 
                     {this.filterCards().map((article) => (
-                        <PinCard article={article} />
+                        <PinCard 
+                        key={article.id} 
+                        article={article} />
                     ))}
 
                 </TabContent>
