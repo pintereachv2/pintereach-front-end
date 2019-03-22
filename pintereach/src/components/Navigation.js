@@ -11,7 +11,7 @@ import {
   DropdownMenu,
   DropdownItem } from 'reactstrap';
   import '../App';
-
+import { Link } from 'react-router-dom'
 export default class Navigation extends React.Component {
   constructor(props) {
     super(props);
@@ -37,9 +37,9 @@ export default class Navigation extends React.Component {
             <Nav className="ml-auto" navbar>
               <NavItem>
                 {!this.props.isLoggingIonSignIn ? (
-                <NavLink href="/login">Sign In</NavLink>
+                <Link to="/login">Sign In</Link>
                 ) : (
-                <NavLink href="/">Sign Up</NavLink>
+                <Link to="/">Sign Up</Link>
                 )}
               </NavItem>
               <UncontrolledDropdown nav inNavbar>
