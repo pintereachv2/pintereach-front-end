@@ -11,10 +11,5 @@
   "start_url": ".",
   "display": "standalone",
   "theme_color": "#000000",
-  "background_color": "#ffffff",
-  // "version": "1.0",
-  // "manifest_version": 2,
-  // "browser_action": {
-  //   "default_popup": "index.html"
-  }
+  "background_color": "#ffffff"
 }
