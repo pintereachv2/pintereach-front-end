@@ -6,10 +6,8 @@ import {
   Nav,
   NavItem,
   NavLink,
-  UncontrolledDropdown,
-  DropdownToggle,
-  DropdownMenu,
-  DropdownItem } from 'reactstrap';
+  UncontrolledDropdown
+} from 'reactstrap';
 import { withRouter } from 'react-router';
 import { Link } from 'react-router-dom'
 import '../App';
@@ -38,13 +36,13 @@ export default class HomeNavigation extends React.Component {
           <Collapse isOpen={this.state.isOpen} navbar>
             <Nav className="ml-auto" navbar>
               <NavItem >
-                <NavLink className='nav-text' href="/home" >Articles</NavLink>
+                <Link className='nav-text' to="/home" >Articles</Link>
               </NavItem>
               <NavItem className='nav-text'>
-              <NavLink className='nav-text' href="/add" >Add New Article</NavLink>
+                <Link className='nav-text' to="/add" >Add New Article</Link>
               </NavItem>
               <NavItem >
-                <NavLink className='nav-text' href="/login" >Log Out</NavLink>
+                <Link className='nav-text' to="/login" >Log Out</Link>
               </NavItem >
             </Nav>
           </Collapse>

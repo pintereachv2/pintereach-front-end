@@ -35,6 +35,8 @@
 }
 
 .nav-item a {
+  margin-right: 7px;
+
   margin-top: -8px;
   font-weight: 800;  
     color: #212529;
