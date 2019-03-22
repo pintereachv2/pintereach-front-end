@@ -16,7 +16,7 @@ const getArticleCategorys = (articles) => {
 }
 
 export const getArticles = () => {
-        axios.get('https://pintereacher.herokuapp.com/api/articles/')
+        axios.get('https://pintereacher.herokuapp.com/api/articles/user')
         .then(res => {
             const articles = res.data
             const categorys = getArticleCategorys(articles)
