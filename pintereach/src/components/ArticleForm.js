@@ -3,6 +3,7 @@ import { Button, Form, Label, Input } from 'reactstrap';
 // import { createArticle } from '../actions';
 import { withRouter } from 'react-router';
 import Loader from 'react-loader-spinner';
+import './ArticleForm.css'
 
 class ArticleForm extends Component {
   // todo update state if article prop is passed down
@@ -21,7 +22,6 @@ class ArticleForm extends Component {
   }
 
   handleInputChange = event => {
-    console.log(event)
     this.setState({
       [event.target.name]: event.target.value
     }
@@ -39,52 +39,53 @@ class ArticleForm extends Component {
 
   render() {
     return (
-      <Form className="Column-Layout">
-        <Label for="Title">Title</Label>
-        <Input
-          className="input"
-          value={this.state.title}
-          name="title"
-          type="text"
-          placeholder="Title"
-          onChange={this.handleInputChange}
-        />
-        <Label for="Content">Content</Label>
-        <Input
-          className="input"
-          value={this.state.content}
-          name="content"
-          type="text"
-          placeholder="Content"
-          onChange={this.handleInputChange}
-        />
-        <Label for="Abstract">Abstract (optional)</Label>
-        <Input
-          className="input"
-          value={this.state.abstract}
-          name="abstract"
-          type="text"
-          placeholder="Abstract"
-          onChange={this.handleInputChange}
-        />
-        <Label for="category">Category</Label>
-        <Input
-          className="input"
-          value={this.state.category}
-          name="category"
-          type="text"
-          placeholder="Category"
-          onChange={this.handleInputChange}
-        />
-        <Button onClick={() => this.handleAddArticle()} type="button">
-          {this.props.updating ? (
-            <Loader type="ThreeDots" color="#1f2a38" height="12" width="26" />
-          ) : (
+      <div className="form-continer">
+        <Form className="Column-Layout">
+          <Label for="Title">Title</Label>
+          <Input
+            className="input"
+            value={this.state.title}
+            name="title"
+            type="text"
+            placeholder="Title"
+            onChange={this.handleInputChange}
+          />
+          <Label for="Content">Content</Label>
+          <Input
+            className="input"
+            value={this.state.content}
+            name="content"
+            type="text"
+            placeholder="Website Url"
+            onChange={this.handleInputChange}
+          />
+          <Label for="Abstract">Abstract (optional)</Label>
+          <Input
+            className="input"
+            value={this.state.abstract}
+            name="abstract"
+            type="textarea"
+            placeholder="Abstract"
+            onChange={this.handleInputChange}
+          />
+          <Label for="category">Category</Label>
+          <Input
+            className="input"
+            value={this.state.category}
+            name="category"
+            type="text"
+            placeholder="Category"
+            onChange={this.handleInputChange}
+          />
+          <Button className={'form-button'} onClick={() => this.handleAddArticle()} type="button">
+            {this.props.updating ? (
+              <Loader type="ThreeDots" color="#1f2a38" height="12" width="26" />
+            ) : (
               <React.Fragment>{this.props.buttonText}</React.Fragment>
             )}
-
-        </Button>
-      </Form>
+          </Button>
+        </Form>
+      </div> 
     );
   }
 }

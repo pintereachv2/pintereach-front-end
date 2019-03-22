@@ -48,14 +48,10 @@ export default class Navigation extends React.Component {
                 </DropdownToggle>
                 <DropdownMenu right>
                   <DropdownItem>
-                    About
+                    About Team
                   </DropdownItem>
                   <DropdownItem>
-                    Contact
-                  </DropdownItem>
-                  <DropdownItem divider />
-                  <DropdownItem>
-                    Logout
+                    Contact Us
                   </DropdownItem>
                 </DropdownMenu>
               </UncontrolledDropdown>

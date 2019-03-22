@@ -16,13 +16,18 @@ class AddArticleView extends React.Component {
     addArticles = (article) => {
             console.log(article)
             createArticle(article)
+            this.props.history.push('/home')
         }
 
     render() {
         return(
             <div>
             <HomeNavigation/>
-                <ArticleForm doOnSubmit={this.addArticles}></ArticleForm>
+                <ArticleForm 
+                    updating={false} 
+                    doOnSubmit={this.addArticles}
+                    buttonText={'Add Article'}
+                    ></ArticleForm>
             </div>
         )
         

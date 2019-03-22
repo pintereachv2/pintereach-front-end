@@ -37,24 +37,15 @@ export default class HomeNavigation extends React.Component {
           <NavbarToggler onClick={this.toggle} />
           <Collapse isOpen={this.state.isOpen} navbar>
             <Nav className="ml-auto" navbar>
-              <NavItem>
-                <NavLink href="/home" >Articles</NavLink>
+              <NavItem >
+                <NavLink className='nav-text' href="/home" >Articles</NavLink>
               </NavItem>
-              <NavItem>
-                <NavLink href="/login" >Log Out</NavLink>
+              <NavItem className='nav-text'>
+              <NavLink className='nav-text' href="/add" >Add New Article</NavLink>
               </NavItem>
-              <UncontrolledDropdown nav inNavbar>
-                <DropdownToggle nav caret>
-                  Article Options
-                </DropdownToggle>
-                <DropdownMenu right>
-                  <DropdownItem>
-                  <Link to="/add">
-                    Add New Article
-                  </Link>
-                  </DropdownItem>
-                </DropdownMenu>
-              </UncontrolledDropdown>
+              <NavItem >
+                <NavLink className='nav-text' href="/login" >Log Out</NavLink>
+              </NavItem >
             </Nav>
           </Collapse>
         </Navbar>

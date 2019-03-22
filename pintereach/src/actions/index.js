@@ -3,20 +3,36 @@ import { getGlobal, setGlobal } from 'reactn'
 
 const URL = 'https://pintereacher.herokuapp.com/api';
 
+const getArticleCategorys = (articles) => {
+    // get global object
+    // map for categorys 
+    console.log(articles)
+
+    const categorys = articles.map(a => a.category)
+    // reduce removing duplicates
+    const uniq = [...new Set(categorys)]; 
+    console.log(uniq)
+    return ['all', ...uniq]
+}
+
 export const getArticles = () => {
-    setGlobal(
-        axios.get('https://pintereacher.herokuapp.com/api/articles/')
-            .then((res) => {
-                return res.data
+        axios.get('https://pintereacher.herokuapp.com/api/articles/user')
+        .then(res => {
+            const articles = res.data
+            const categorys = getArticleCategorys(articles)
+            setGlobal({
+                articles,
+                tabCategorys: categorys
             })
-            .then(articles => ({ articles }))
-            .catch(err => ({ error: err }))
-    );
+            return res.data
+        })
+        .catch(err => console.log(err) )
+    console.log(getGlobal())
 }
 
 export const createArticle = article => {
     // console.log(article)
-    axios.post(`${URL}/articles`, article).then(status => {
+    return axios.post(`${URL}/articles`, article).then(status => {
         // console.log(status)
         return status
     });
@@ -42,10 +58,3 @@ export const editArticle = article => {
         return status
     });
 };
-
-// export const updateSingleArticle = article => {
-//   return {
-//     type: SINGLE_ARTICLE,
-//     payload: article
-//   };
-// };
