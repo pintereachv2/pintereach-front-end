@@ -52,6 +52,13 @@ class Tabs extends React.Component {
     // then when a tab is selected. filter for that category
     //
 
+    getArticleCategorys = () => {
+    }
+    // first 
+    // find unquie article categorys 
+    // make tabs based on those categorys
+    // then when a tab is selected. filter for that category
+    //
 
 
     render() {
